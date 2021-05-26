@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js",
-    "test": "test"
+    "test": "test",
+    "load-data": "node ./src/scripts/load-data.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.12.0",
+    "mongoose-paginate-v2": "^1.3.18",
     "nodemon": "^2.0.7"
   }
 }
