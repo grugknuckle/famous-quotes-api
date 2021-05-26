@@ -52,6 +52,7 @@ class Database {
   async disconnect() {
     try {
       console.log(`Disconnecting from database: ${this.name} ...`)
+      await this.connection.close()
     } catch (error) {
       console.log(error)
       throw error
