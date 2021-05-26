@@ -1,24 +1,36 @@
 require('dotenv').config()
 const express = require('express')
-const mongoose = require('mongoose')
+const Database = require('./database/Database.js')
 const routes = require('./routes')
 
-const app = express()
-const port = 5000
+startup()
 
-app.use(express.json())
+/**
+ * Startup the server
+ */
+async function startup() {
+  const app = express()
+  const port = process.env.PORT || 5000
 
-routes(app)
+  app.use(express.json())
+  routes.initialize(app)
+  
+  const database = new Database(process.env.DB_CONNECTION_STRING)
+  await database.connect()
 
-const uri = process.env.DB_CONNECTION_STRING
+  app.listen(port, () => {
+    console.log(`Express.js server is running on port: ${port}`)
+  })
+}
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-const connection = mongoose.connection
+/**
+ * Gracefully stop the server
+ */
+async function shutdown() {
+  // TODO: close connections to Mongo.
+}
 
-connection.once('open', () => {
-    console.log("MongoDB database connection established successfully")
-})
-
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`)
-})
+module.exports = {
+  startup,
+  shutdown
+}

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-let Quote = require('../database/quote.model')
+let Quote = require('../database/models/quote.model')
 
 module.exports = router
 

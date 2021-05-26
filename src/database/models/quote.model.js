@@ -2,6 +2,20 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+/*
+Example data
+
+{
+  "text": "You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.",
+  "author": "Abraham Lincoln",
+  "citation": "\"Abraham Lincoln Quotes.\" BrainyQuote.com. BrainyMedia Inc, 2021. 1 March 2021. https://www.brainyquote.com/quotes/abraham_lincoln_110340",
+  "source": "https://www.brainyquote.com/quotes/abraham_lincoln_110340",
+  "tags": [],
+  "likes": 0,
+  "dislikes": 0
+  },
+*/
+
 const quoteSchema = new Schema({
   text: {
     type: String,
@@ -34,19 +48,7 @@ const quoteSchema = new Schema({
   timestamps: true,
 })
 
+// QuoteSchema.plugin(mongoosePaginate)
 const Quote = mongoose.model('Quote', quoteSchema)
 
 module.exports = Quote
-
-
-/*
-{
-    "text": "You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.",
-    "author": "Abraham Lincoln",
-    "citation": "\"Abraham Lincoln Quotes.\" BrainyQuote.com. BrainyMedia Inc, 2021. 1 March 2021. https://www.brainyquote.com/quotes/abraham_lincoln_110340",
-    "source": "https://www.brainyquote.com/quotes/abraham_lincoln_110340",
-    "tags": [],
-    "likes": 0,
-    "dislikes": 0
-  },
-*/
