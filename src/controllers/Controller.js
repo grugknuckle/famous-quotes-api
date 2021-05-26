@@ -60,23 +60,46 @@ class Controller {
    * @param {Object} req Express.js request object. https://expressjs.com/en/4x/api.html#req
    * @param {Object} res Express.js response object https://expressjs.com/en/4x/api.html#res
    * @param {Object} param
-   * @param {String} param.controller The name of the netsuite controller to talk to one of
-   *          items, transactions, entities, inventory, testing, design, communication.
    * @param {Number} param.status The HTTP status code
    * @param {String} param.message The HTTP(s) request body of the relayed request.
    * @param {Object} param.data The response data
    */
   static formatResponse(req, res, { status, message, data }) {
-    status = Controller.httpCodes.hasOwnProperty(status) ? status : 500
-    const stat = Controller.httpCodes[status]
+    status = httpCodes.hasOwnProperty(status) ? status : 500
+    const stat = httpCodes[status]
     const response = {
       method: req.method.toUpperCase(),
-      controller: this.name,
+      resource: req.baseUrl,
       success: stat.success,
       status,
       statusText: stat.text,
       message,
-      data,
+      data
+    }
+    return response
+  }
+
+  /**
+   * 
+   * @static
+   * @param {Object} req Express.js request object. https://expressjs.com/en/4x/api.html#req
+   * @param {Object} res Express.js response object https://expressjs.com/en/4x/api.html#res
+   * @param {Error} error The error that was thrown.
+   * @returns 
+   */
+  static errorHandler(req, res, error) {
+    // TODO: set different status codes based on the error message
+    const status = httpCodes[500]
+    const response = {
+      method: req.method.toUpperCase(),
+      resource: req.baseUrl,
+      success: status.success,
+      status: 500,
+      statusText: status.text,
+      message: error.message,
+      data: {
+        error
+      }
     }
     return response
   }
