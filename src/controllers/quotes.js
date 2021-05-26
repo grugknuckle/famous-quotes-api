@@ -49,14 +49,17 @@ module.exports = {
 // Don't forge to use aliasing in jsdocs ... @alias module:Controllers.searchQuotes
 
 /**
- * Search the Quotes Collection
+ * Search the Quotes Collection.
+ * 
+ * TODO: implement query parameters to search by author, by key words, tags etc.
  * 
  * @param {Request} req [Express.js](https://expressjs.com/) [request](https://expressjs.com/en/4x/api.html#req) object.
  * @param {Response} res [Express.js](https://expressjs.com/) [response](https://expressjs.com/en/4x/api.html#res) object.
  */
 async function search(req, res) {
   try {
-    const data = await Quote.find()
+    const found = await Quote.find()
+    const data = found.map(q => q.format())
     const status = 200
     const response = formatResponse(req, res, { status, data, message: `found ${data.length} documents matching your query` })
     res.status(status).json(response)
@@ -75,7 +78,7 @@ async function findById(req, res) {
   try {
     const found = await Quote.findById(req.params.id)
     const status = found ? 200 : 404
-    const data = found ||  {}
+    const data = found.format() ||  {}
     const message = found ? `Found document with id=${req.params.id}` : `Document with id=${req.params.id} not found.`
     const json = formatResponse(req, res, { status, data, message })
     res.status(status).json(json)
@@ -112,6 +115,7 @@ async function create(req, res) {
 async function update(req, res) {
   try {
     const found = await Quote.findById(req.params.id)
+    console.log(found)
     const body = parseQuoteBody(req)
     
     if (!found) {
@@ -119,12 +123,18 @@ async function update(req, res) {
       return res.json(json)
     }
 
-    for(let key of Object.keys(body)) {
-      found[key] = body[key]
-    }
-
+    found.text = req.body.text ?? found.text
+    found.author = req.body.author ?? found.author
+    found.citation = req.body.citation ?? found.citation
+    found.source = req.body.source ?? found.source
+    found.tags = req.body.tags ?? found.tags
+    found.likes = req.body.likes ?? found.likes
+    found.dislikes = req.body.dislikes ?? found.dislikes
+    found.increment()
+    console.log(found)
     const data = await found.save()
-    const json = formatResponse(req, res, { status: 200, data, message: `Updated document.` })
+    const json = formatResponse(req, res, { status: 200, data: data.format(), message: `Updated document.` })
+    res.status(200).json(json)
   } catch (error) {
     res.json(errorHandler(req, res, error))
   }
@@ -138,7 +148,8 @@ async function update(req, res) {
  */
 async function remove(req, res) {
   try {
-    const data = await Quote.findByIdAndRemove(req.params.id)
+    const removed = await Quote.findByIdAndRemove(req.params.id)
+    const data = removed.format()
     const status = 200
     const json = formatResponse(req, res, { status, data, message: `Removed document with id=${req.params.id}` })
     res.status(status).json(json)
