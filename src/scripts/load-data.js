@@ -1,25 +1,29 @@
 require('dotenv').config()
-const mongoose = require('mongoose')
-const uri = process.env.DB_CONNECTION_STRING
+const Database = require('./../database/Database')
+const Quote = require('./../database/models/quote.model')
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-const connection = mongoose.connection
+const dataset = require('./../database/datasets/ulysses-grant.json')
+
+loadEmUp()
 
 
+async function loadEmUp() {
+  const database = new Database(process.env.DB_CONNECTION_STRING)
+  await database.connect()
 
-const data = {
-  text: 'You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.',
-  author: 'Abraham Lincoln',
-  citation: '\'Abraham Lincoln Quotes.\' BrainyQuote.com. BrainyMedia Inc, 2021. 1 March 2021. https://www.brainyquote.com/quotes/abraham_lincoln_110340',
-  source: 'https://www.brainyquote.com/quotes/abraham_lincoln_110340',
-  tags: [],
-  likes: 0,
-  dislikes: 0
+  console.log(`preparing to load ${dataset.length} quotes from dataset ...`)
+  for (let datapoint of dataset) {
+    try {
+      const body = Quote.parseQuoteBody({ body: datapoint })
+      const quote = new Quote(body)
+      const data = await quote.save()
+      console.log(`loaded id=${quote._id}: ${quote.text}`)
+    } catch (error) {
+      console.log(`failed to load quote: ${error}`)
+    }
+  }
+
+  await database.disconnect()
+  console.log('DONE !')
 }
 
-connection.once('open', open)
-
-async function open() {
-  console.log('MongoDB database connection established successfully')
-
-}
