@@ -95,7 +95,7 @@ async function findById(req, res) {
  */
 async function create(req, res) {
   try {
-    const body = parseQuoteBody(req)
+    const body = Quote.parseQuoteBody(req)
     const quote = new Quote(body)
     const data = await quote.save()
     const status = 201
@@ -116,7 +116,7 @@ async function update(req, res) {
   try {
     const found = await Quote.findById(req.params.id)
     console.log(found)
-    const body = parseQuoteBody(req)
+    const body = Quote.parseQuoteBody(req)
     
     if (!found) {
       const json = formatResponse(req, res, { status: 404, data: body, message: `Document with id=${req.params.id} was not found.` })
@@ -158,18 +158,18 @@ async function remove(req, res) {
   }
 }
 
-function parseQuoteBody(req) {
-  const body = {
-    text: req.body.text,
-    author: req.body.author,
-    citation: req.body.citation,
-    source: req.body.source,
-    tags: req.body.tags,
-    likes: req.body.likes || 0,
-    dislikes: req.body.dislikes || 0
-  }
-  return body
-}
+// function parseQuoteBody(req) {
+//   const body = {
+//     text: req.body.text,
+//     author: req.body.author,
+//     citation: req.body.citation,
+//     source: req.body.source,
+//     tags: req.body.tags,
+//     likes: req.body.likes || 0,
+//     dislikes: req.body.dislikes || 0
+//   }
+//   return body
+// }
 
 function errorHandler(req, res, error) {
   // TODO: set different status codes based on the error message

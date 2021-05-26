@@ -62,6 +62,9 @@ const quoteSchema = new Schema({
     timestamps: true,
   })
 
+
+
+/* INSTANCE METHODS */
 quoteSchema.methods.format = function () {
   const formatted = {
     id: this._id,
@@ -79,9 +82,22 @@ quoteSchema.methods.format = function () {
   return formatted
 }
 
+/* STATIC METHODS */
+quoteSchema.statics.parseQuoteBody = function(req) {
+  const body = {
+    text: req.body.text,
+    author: req.body.author,
+    citation: req.body.citation,
+    source: req.body.source,
+    tags: req.body.tags,
+    likes: req.body.likes || 0,
+    dislikes: req.body.dislikes || 0
+  }
+  return body
+}
+
 quoteSchema.plugin(mongoosePaginate)
 const Quote = mongoose.model('Quote', quoteSchema)
-
 
 
 module.exports = Quote
