@@ -18,86 +18,89 @@ Example data
 
 //https://mongoosejs.com/docs/schematypes.html#schematype-options
 
-// define fields
-const quoteSchema = new Schema({
-    text: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    author: {
-      type: String,
-      required: true,
-      unique: false,
-      trim: true,
-    },
-    citation: {
-      type: String,
-      required: false
-    },
-    source: {
-      type: String,
-      required: false
-    },
-    tags: {
-      type: [String],
-      required: false,
-      default: []
-    },
-    likes: { 
-      type: Number,
-      required: false,
-      min: 0,
-      default: 0
-    },
-    dislikes: {
-      type: Number,
-      required: false,
-      min: 0,
-      default: 0
-    }
+const structure = {
+  text: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
   },
-  {
-    timestamps: true,
-  })
-
-
-
-/* INSTANCE METHODS */
-quoteSchema.methods.format = function () {
-  const formatted = {
-    id: this._id,
-    text: this.text,
-    author: this.author,
-    citation: this.citation,
-    source: this.source,
-    tags: this.tags,
-    likes: this.likes,
-    dislikes: this.dislikes,
-    createdAt: this.createdAt,
-    updatedAt: this.updatedAt,
-    revision: this._v
+  author: {
+    type: String,
+    required: true,
+    unique: false,
+    trim: true,
+  },
+  citation: {
+    type: String,
+    required: false
+  },
+  source: {
+    type: String,
+    required: false
+  },
+  tags: {
+    type: [String],
+    required: false,
+    default: []
+  },
+  likes: { 
+    type: Number,
+    required: false,
+    min: 0,
+    default: 0
+  },
+  dislikes: {
+    type: Number,
+    required: false,
+    min: 0,
+    default: 0
   }
-  return formatted
+}
+const options = {
+  timestamps: true,
 }
 
-/* STATIC METHODS */
-quoteSchema.statics.parseQuoteBody = function(req) {
-  const body = {
-    text: req.body.text,
-    author: req.body.author,
-    citation: req.body.citation,
-    source: req.body.source,
-    tags: req.body.tags,
-    likes: req.body.likes || 0,
-    dislikes: req.body.dislikes || 0
+const quoteSchema = new Schema(structure, options)
+
+class Quotation {
+  constructor() {}
+
+  format() {
+    const formatted = {
+      id: this._id,
+      text: this.text,
+      author: this.author,
+      citation: this.citation,
+      source: this.source,
+      tags: this.tags,
+      likes: this.likes,
+      dislikes: this.dislikes,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      revision: this._v
+    }
+    return formatted
   }
-  return body
+
+  static parseRequestBody(body) {
+    const data = {
+      text: body.text,
+      author: body.author,
+      citation: body.citation,
+      source: body.source,
+      tags: body.tags,
+      likes: body.likes || 0,
+      dislikes: body.dislikes || 0
+    }
+    return data
+  }
+
+  static jsonSchema() {}
 }
 
+quoteSchema.loadClass(Quotation)
 quoteSchema.plugin(mongoosePaginate)
-const Quote = mongoose.model('Quote', quoteSchema)
+const QuoteModel = mongoose.model('Quote', quoteSchema)
 
-
-module.exports = Quote
+module.exports = QuoteModel

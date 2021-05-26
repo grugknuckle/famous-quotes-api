@@ -14,7 +14,7 @@ async function loadEmUp() {
   console.log(`preparing to load ${dataset.length} quotes from dataset ...`)
   for (let datapoint of dataset) {
     try {
-      const body = Quote.parseQuoteBody({ body: datapoint })
+      const body = Quote.parseRequestBody({ body: datapoint })
       const quote = new Quote(body)
       const data = await quote.save()
       console.log(`loaded id=${quote._id}: ${quote.text}`)
