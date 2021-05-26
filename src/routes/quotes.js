@@ -1,5 +1,6 @@
 const router = require('express').Router()
-let controller = require('./../controllers/quotes')
+const QuoteController = require('./../controllers/QuoteController')
+const controller = new QuoteController()
 
 module.exports = router
 
@@ -7,12 +8,12 @@ module.exports = router
 // TODO ... add route parameters
 
 router.route('/')
-  .get(controller.search)
+  .get((req, res) => controller.search(req, res))
 
 router.route('/:id')
-  .get(controller.findById)
-  .delete(controller.remove)
-  .put(controller.update)
+  .get((req, res) => controller.findById(req, res))
+  .delete((req, res) => controller.remove(req, res))
+  .put((req, res) => controller.update(req, res))
 
 router.route('/add')
-  .post(controller.create)
+  .post((req, res) => controller.create(req, res))

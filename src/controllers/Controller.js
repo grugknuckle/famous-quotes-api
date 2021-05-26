@@ -8,7 +8,7 @@
  * @alias module:Models.Controller
  */
 class Controller {
-  constructor({ name }) {
+  constructor(name='default') {
     this.name = name
   }
 
@@ -65,8 +65,8 @@ class Controller {
    * @param {Object} param.data The response data
    */
   static formatResponse(req, res, { status, message, data }) {
-    status = httpCodes.hasOwnProperty(status) ? status : 500
-    const stat = httpCodes[status]
+    status = Controller.httpCodes.hasOwnProperty(status) ? status : 500
+    const stat = Controller.httpCodes[status]
     const response = {
       method: req.method.toUpperCase(),
       resource: req.baseUrl,
@@ -89,7 +89,7 @@ class Controller {
    */
   static errorHandler(req, res, error) {
     // TODO: set different status codes based on the error message
-    const status = httpCodes[500]
+    const status = Controller.httpCodes[500]
     const response = {
       method: req.method.toUpperCase(),
       resource: req.baseUrl,
