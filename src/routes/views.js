@@ -1,10 +1,14 @@
 const router = require('express').Router()
-let Quote = require('../database/models/quote.model')
 
 module.exports = router
 
 router
   .route('/')
   .get((req, res) => {
-    res.json('Hello from the Quote API!')
+    const json = {
+      isAuthenticated: req.oidc.isAuthenticated(),
+      message: 'Hello from the Famous Quotations API!'
+    }
+
+    res.status(200).json(json)
   })
