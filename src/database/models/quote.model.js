@@ -63,7 +63,7 @@ const options = {
 
 const quoteSchema = new Schema(structure, options)
 
-class Quotation {
+class Quote {
   constructor() {}
 
   format() {
@@ -99,8 +99,8 @@ class Quotation {
   static jsonSchema() {}
 }
 
-quoteSchema.loadClass(Quotation)
+quoteSchema.loadClass(Quote)
 quoteSchema.plugin(mongoosePaginate)
 const QuoteModel = mongoose.model('Quote', quoteSchema)
 
-module.exports = QuoteModel
+module.exports = { QuoteModel, Quote }

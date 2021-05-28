@@ -1,5 +1,5 @@
 const Controller = require('./Controller')
-const Quote = require('./../database/models/quote.model')
+const { QuoteModel } = require('./../database/models/quote.model')
 
 class QuoteController extends Controller {
   constructor() {
@@ -17,7 +17,7 @@ class QuoteController extends Controller {
    */
   async search(req, res) {
     try {
-      const found = await Quote.find()
+      const found = await QuoteModel.find()
       const status = 200
       const data = found.map(q => q.format())
       const message = `found ${data.length} documents matching your query`
@@ -38,7 +38,7 @@ class QuoteController extends Controller {
    */
   async findById(req, res) {
     try {
-      const found = await Quote.findById(req.params.id)
+      const found = await QuoteModel.findById(req.params.id)
       const status = found ? 200 : 404
       const data = found.format() ||  {}
       const message = found ? `Found document with id=${req.params.id}` : `Document with id=${req.params.id} not found.`
@@ -59,8 +59,8 @@ class QuoteController extends Controller {
    */
   async create(req, res) {
     try {
-      const body = Quote.parseRequestBody(req.body)
-      const quote = new Quote(body)
+      const body = QuoteModel.parseRequestBody(req.body)
+      const quote = new QuoteModel(body)
       const data = await quote.save()
       const status = 201
       const json = QuoteController.formatResponse(req, res, { status, data, message: `Created new document.` })
@@ -80,8 +80,8 @@ class QuoteController extends Controller {
    */
   async update(req, res) {
     try {
-      const found = await Quote.findById(req.params.id)
-      const body = Quote.parseRequestBody(req.body)
+      const found = await QuoteModel.findById(req.params.id)
+      const body = QuoteModel.parseRequestBody(req.body)
       
       if (!found) {
         const status = 404
@@ -121,7 +121,7 @@ class QuoteController extends Controller {
    */
   async remove(req, res) {
     try {
-      const removed = await Quote.findByIdAndRemove(req.params.id)
+      const removed = await QuoteModel.findByIdAndRemove(req.params.id)
       const status = 200
       const data = removed.format()
       const message = `Removed document with id=${req.params.id}`
