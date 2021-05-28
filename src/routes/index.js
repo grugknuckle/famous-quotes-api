@@ -28,7 +28,7 @@ function initialize(app) {
   )
 
   app.use('/', require('./views'))
-  app.use('/oauth', require('./oauth'))
+  app.use('/oauth', requiresAuth(), require('./oauth'))
   app.use('/api/v1/quotes', requiresAuth(), require('./quotes'))
 }
 
