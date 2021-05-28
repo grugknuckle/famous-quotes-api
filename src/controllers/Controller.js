@@ -9,7 +9,7 @@
  */
 class Controller {
   constructor(name='default') {
-    this.name = name
+    this._name = name
   }
 
   /**
@@ -53,6 +53,8 @@ class Controller {
     }
   }
 
+  get name() { return this._name }
+  
   /**
    * Format the JSON response with meta data and respond to requester
    *
