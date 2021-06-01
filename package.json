@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js",
-    "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict",
+    "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --silent --forceExit",
     "load-data": "node ./src/scripts/load-data.js"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "jest-express": "^1.12.0",
     "jsdoc-to-markdown": "^7.0.1",
     "json-to-pretty-yaml": "^1.2.2",
-    "jsonfile": "^6.1.0"
+    "jsonfile": "^6.1.0",
+    "supertest": "^6.1.3"
   }
 }

@@ -1,8 +1,10 @@
 // jest.config.js
-const { defaults } = require('jest-config')
 const path = require('path')
 
+
+// Testing Mongoose with Jest ... https://mongoosejs.com/docs/jest.html
 module.exports = {
+  testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleDirectories: [
     // '<rootDir>',
