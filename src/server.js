@@ -1,6 +1,8 @@
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '../.env.test') })
+// require('dotenv').config({ path: path.join(__dirname, '../.env') })
 const express = require('express')
-const Database = require('./database/Database.js')
+const Database = require('./lib/Database.js')
 const routes = require('./routes')
 
 startup()
