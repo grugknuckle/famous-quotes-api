@@ -1,4 +1,5 @@
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '../.env') })
 const Database = require('./../database/Database')
 const { QuoteModel } = require('./../database/models/quote.model')
 
@@ -14,7 +15,7 @@ async function loadEmUp() {
   console.log(`preparing to load ${dataset.length} quotes from dataset ...`)
   for (let datapoint of dataset) {
     try {
-      const body = QuoteModel.parseRequestBody({ body: datapoint })
+      const body = QuoteModel.parseInput({ body: datapoint })
       const quote = new QuoteModel(body)
       const data = await quote.save()
       console.log(`loaded id=${quote._id}: ${quote.text}`)

@@ -66,7 +66,7 @@ class Controller {
    * @param {String} param.message The HTTP(s) request body of the relayed request.
    * @param {Object} param.data The response data
    */
-  static formatResponse(req, res, { status, message, data }) {
+  formatResponse(req, res, { status, message, data }) {
     status = Controller.httpCodes.hasOwnProperty(status) ? status : 500
     const stat = Controller.httpCodes[status]
     const response = {
@@ -89,7 +89,7 @@ class Controller {
    * @param {Error} error The error that was thrown.
    * @returns 
    */
-  static errorHandler(req, res, error) {
+  errorHandler(req, res, error) {
     // TODO: set different status codes based on the error message
     const status = Controller.httpCodes[500]
     const response = {

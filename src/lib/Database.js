@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const database = process.env.DB_CONNECTION_STRING
 
 /**
  * Database class manages connections to the MongoDB database.
