@@ -1,6 +1,4 @@
-// const tv4 = require('tv4')
-// const moment = require('moment')
-// const formatString = 'YYYY-MM-DDTHH:mm:ss'
+const Validator = require('jsonschema').Validator
 
 /**
  * Handles the enqueuing of tasks, formatting of responses and errors for a a set of endpoints. 
@@ -10,6 +8,7 @@
 class Controller {
   constructor(name='default') {
     this._name = name
+    this._validator = new Validator()
   }
 
   /**
@@ -54,7 +53,8 @@ class Controller {
   }
 
   get name() { return this._name }
-  
+  get validator() { return this._validator }
+
   /**
    * Format the JSON response with meta data and respond to requester
    *
@@ -104,6 +104,25 @@ class Controller {
       }
     }
     return response
+  }
+
+  /**
+   * https://www.npmjs.com/package/jsonschema
+   * @param {*} schema 
+   * @param {*} id 
+   */
+  addSchema(schema, id) {
+    this.validator.addSchema(schema, id)
+  }
+
+  /**
+   * https://www.npmjs.com/package/jsonschema
+   * @param {*} body 
+   * @param {*} schema 
+   * @returns 
+   */
+  validateRequestBody(body, schema) {
+    return this.validator.validate(body, schema)
   }
 }
 

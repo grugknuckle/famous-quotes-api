@@ -5,10 +5,28 @@ class QuoteService {
 
   get model() { return this._model }
 
-  async search() {
-    const found = await this.model.find()
-    const data = found.map(q => q.format())
-    return { status: 200, message: `found ${data.length} documents matching your query`, data }
+  async search(query) {
+    let filter = {}
+    if (query.text) {
+      filter.text = { $regex: `${query.text}`, $options: 'i' }
+    }
+    if (query.author) {
+      filter.author = { $regex: query.author, $options: 'i' }
+    }
+    if (query.citation) {
+      filter.citation = { $regex: query.citation, $options: 'i' }
+    }
+    if (query.source) {
+      filter.source = { $regex: query.source, $options: 'i' }
+    }
+    const options = {
+      page: parseInt(query.page ?? 1),
+      limit: parseInt(query.limit ?? 50),
+    }
+
+    const found = await this.model.paginate(filter, options)
+    found.docs = found.docs.map(quote => quote.format())
+    return { status: 200, message: `found ${found.totalDocs} documents matching your query`, data: found }
   }
   
   async findById(id) {

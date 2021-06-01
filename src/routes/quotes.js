@@ -13,7 +13,7 @@ module.exports = router
 router.route('/')
   .get(async (req, res) => {
     try {
-      const { status, message, data } = await service.search()
+      const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })
       res.status(status).json(json)
     } catch (error) {

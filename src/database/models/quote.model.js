@@ -11,12 +11,14 @@ const structure = {
     required: true,
     unique: true,
     trim: true,
+    index: true,
   },
   author: {
     type: String,
     required: true,
     unique: false,
     trim: true,
+    index: true,
   },
   citation: {
     type: String,
