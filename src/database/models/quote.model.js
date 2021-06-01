@@ -1,6 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
+const Quote = require('./../definitions/Quote')
+
+//https://mongoosejs.com/docs/schematypes.html#schematype-options
 
 /*
 Example data
@@ -15,8 +18,6 @@ Example data
   "dislikes": 0
   },
 */
-
-//https://mongoosejs.com/docs/schematypes.html#schematype-options
 
 const structure = {
   text: {
@@ -62,45 +63,8 @@ const options = {
 }
 
 const quoteSchema = new Schema(structure, options)
-
-class Quote {
-  constructor() {}
-
-  format() {
-    const formatted = {
-      id: this._id,
-      text: this.text,
-      author: this.author,
-      citation: this.citation,
-      source: this.source,
-      tags: this.tags,
-      likes: this.likes,
-      dislikes: this.dislikes,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      revision: this._v
-    }
-    return formatted
-  }
-
-  static parseRequestBody(body) {
-    const data = {
-      text: body.text,
-      author: body.author,
-      citation: body.citation,
-      source: body.source,
-      tags: body.tags,
-      likes: body.likes || 0,
-      dislikes: body.dislikes || 0
-    }
-    return data
-  }
-
-  static jsonSchema() {}
-}
-
 quoteSchema.loadClass(Quote)
 quoteSchema.plugin(mongoosePaginate)
 const QuoteModel = mongoose.model('Quote', quoteSchema)
 
-module.exports = { QuoteModel, Quote }
+module.exports = QuoteModel
