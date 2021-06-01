@@ -41,7 +41,7 @@ class QuoteService {
   }
   
   async create(input) {
-    const quote = new QuoteModel(this.model.parseInput(input))
+    const quote = new this.model(this.model.parseInput(input))
     const data = await quote.save()
     return { status: 201, message: `Created new document.`, data }
   }

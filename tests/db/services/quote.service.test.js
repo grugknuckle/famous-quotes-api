@@ -1,17 +1,24 @@
-const QuoteService = require('../../../src/database/services/quote.service')
+// const mongoose = require('mongoose')
+// const mongoDB = 'mongodb://127.0.0.1/test_database'
+// mongoose.connect(mongoDB)
 
-const Database = require('./../../../src/lib/Database.js')
-const uri = process.env.DB_CONNECTION_STRING
-const database = new Database(uri)
+const QuoteService = require('../../../src/database/services/quote.service')
+const QuoteModel = require('./../../../src/database/models/quote.model')
+
+const sample = {
+  text: 'You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.',
+  author: 'Abraham Lincoln',
+  citation: '"Abraham Lincoln Quotes." BrainyQuote.com. BrainyMedia Inc, 2021. 1 March 2021. https://www.brainyquote.com/quotes/abraham_lincoln_110340',
+  source: 'https://www.brainyquote.com/quotes/abraham_lincoln_110340',
+  tags: [],
+  likes: 0,
+  dislikes: 0
+}
 
 describe('QuoteService class ...', () => {
 
-  beforeAll(async () => {
-    await database.connect()
-  })
-
-  afterAll(async () => {
-    await database.disconnect()
+  it('is defined', () => {
+    expect(QuoteService).toBeDefined()
   })
 
   describe('constructor', () => {
@@ -20,18 +27,23 @@ describe('QuoteService class ...', () => {
   })
 
   describe('instance methods', () => {
-    let service
-    beforeAll(() => {
-      service = new QuoteService()
-    })
+    let service = new QuoteService(QuoteModel)
+    beforeAll(() => {})
 
-    test('The QuoteService is instantiated', () => {
+    it('The QuoteService is instantiated', () => {
       expect(service).toBeDefined()
       expect(service).toBeInstanceOf(QuoteService)
     })
 
     describe('the model property', () => {
-      it('is defined and is not static', () => {})
+      it('is defined and is not static', () => {
+        console.log(service.model)
+        expect(service.model).toBeDefined()
+        expect(QuoteService.model).not.toBeDefined()
+      })
+      it('returns the parameter input to the class constructor', () => {
+        expect(service.model).toEqual(QuoteModel)
+      })
     })
 
     describe('search', () => {
@@ -40,7 +52,9 @@ describe('QuoteService class ...', () => {
         expect(service.search).toBeInstanceOf(Function)
         expect(QuoteService.search).not.toBeDefined()
       })
-      it.todo('is an async function')
+      it('is an async function', () => {
+        expect(service.search.constructor.name).toBe('AsyncFunction')
+      })
     })
 
     describe('findById', () => {
@@ -49,7 +63,9 @@ describe('QuoteService class ...', () => {
         expect(service.findById).toBeInstanceOf(Function)
         expect(QuoteService.findById).not.toBeDefined()
       })
-      it.todo('is an async function')
+      it('is an async function', () => {
+        expect(service.findById.constructor.name).toBe('AsyncFunction')
+      })
     })
 
     describe('create', () => {
@@ -58,7 +74,9 @@ describe('QuoteService class ...', () => {
         expect(service.create).toBeInstanceOf(Function)
         expect(QuoteService.create).not.toBeDefined()
       })
-      it.todo('is an async function')
+      it('is an async function', () => {
+        expect(service.create.constructor.name).toBe('AsyncFunction')
+      })
     })
 
     describe('update', () => {
@@ -67,7 +85,9 @@ describe('QuoteService class ...', () => {
         expect(service.update).toBeInstanceOf(Function)
         expect(QuoteService.update).not.toBeDefined()
       })
-      it.todo('is an async function')
+      it('is an async function', () => {
+        expect(service.update.constructor.name).toBe('AsyncFunction')
+      })
     })
 
     describe('remove', () => {
@@ -76,7 +96,9 @@ describe('QuoteService class ...', () => {
         expect(service.remove).toBeInstanceOf(Function)
         expect(QuoteService.remove).not.toBeDefined()
       })
-      it.todo('is an async function')
+      it('is an async function', () => {
+        expect(service.remove.constructor.name).toBe('AsyncFunction')
+      })
     })
   })
 })

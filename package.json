@@ -9,7 +9,7 @@
     "start": "node startup.js prod",
     "start-dev": "nodemon startup.js dev",
     "start-local": "nodemon startup.js local",
-    "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --silent --forceExit",
+    "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "load-data": "node ./src/scripts/load-data.js"
   },
   "repository": {
