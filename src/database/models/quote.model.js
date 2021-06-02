@@ -6,45 +6,13 @@ const Quote = require('./../definitions/Quote')
 //https://mongoosejs.com/docs/schematypes.html#schematype-options
 
 const structure = {
-  text: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    index: true,
-  },
-  author: {
-    type: String,
-    required: true,
-    unique: false,
-    trim: true,
-    index: true,
-  },
-  citation: {
-    type: String,
-    required: false
-  },
-  source: {
-    type: String,
-    required: false
-  },
-  tags: {
-    type: [String],
-    required: false,
-    default: []
-  },
-  likes: { 
-    type: Number,
-    required: false,
-    min: 0,
-    default: 0
-  },
-  dislikes: {
-    type: Number,
-    required: false,
-    min: 0,
-    default: 0
-  }
+  text: { type: String, required: true, unique: true, trim: true },
+  author: { type: Schema.Types.ObjectId, ref: 'Author', required: true, },
+  citation: { type: String, required: false },
+  source: { type: String, required: false },
+  tags: { type: [String], required: false, default: [] },
+  likes: { type: Number, required: false, min: 0, default: 0 },
+  dislikes: { type: Number, required: false, min: 0, default: 0 }
 }
 const options = {
   timestamps: true,

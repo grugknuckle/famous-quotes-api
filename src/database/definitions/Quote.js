@@ -18,6 +18,40 @@ class Quote {
     return formatted
   }
 
+  patch(body) {
+    this.text = body.text ?? found.text
+    this.author = body.author ?? found.author
+    this.citation = body.citation ?? found.citation
+    this.source = body.source ?? found.source
+    this.tags = body.tags ?? found.tags
+    this.likes = body.likes ?? found.likes
+    this.dislikes = body.dislikes ?? found.dislikes
+    this.increment()
+  }
+
+  static parseQuery(query) {
+    let filter = {}
+    if (query.text) {
+      filter.text = { $regex: `${query.text}`, $options: 'i' }
+    }
+    if (query.author) {
+      filter.author = { $regex: query.author, $options: 'i' }
+    }
+    if (query.citation) {
+      filter.citation = { $regex: query.citation, $options: 'i' }
+    }
+    if (query.source) {
+      filter.source = { $regex: query.source, $options: 'i' }
+    }
+    const options = {
+      page: parseInt(query.page ?? 1),
+      limit: parseInt(query.limit ?? 50),
+      populate: 'author'
+    }
+
+    return { filter, options }
+  }
+
   static parseInput(body) {
     const data = {
       text: body.text,
