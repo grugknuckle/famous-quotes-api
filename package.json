@@ -10,7 +10,8 @@
     "start-dev": "nodemon startup.js dev",
     "start-local": "nodemon startup.js local",
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
-    "load-data": "node ./src/scripts/load-data.js"
+    "load-data": "node ./src/scripts/load-data.js",
+    "clear-db": "node ./src/scripts/clear-collection.js"
   },
   "repository": {
     "type": "git",
