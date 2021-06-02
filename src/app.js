@@ -26,6 +26,7 @@ app.use(
 app.use('/', require('./routes/views'))
 app.use('/api/v1/oauth', requiresAuth(), require('./routes/oauth'))
 app.use('/api/v1/quotes', requiresAuth(), require('./routes/quotes'))
+app.use('/api/v1/authors', requiresAuth(), require('./routes/authors'))
 app.use('/', require('./routes/errors'))
 
 // express-winston errorLogger AFTER the other routes have been defined.
