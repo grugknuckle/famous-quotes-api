@@ -1,10 +1,11 @@
 const router = require('express').Router()
-const { requiresAuth } = require('express-openid-connect')
+const Controller = require('./../lib/Controller')
+const controller = new Controller('authentication')
 
 module.exports = router
 
 router.route('/profile')
-  .get((req, res) => {
+  .get((req, res, next) => {
     /*
     {
       "given_name": "Grugknuckle",
@@ -18,11 +19,23 @@ router.route('/profile')
       "sub": "google-oauth2|117305745212471508481"
     }
     */
-    res.json(req.oidc.user)
+    try {
+      const json = controller.formatResponse(req, res, { status: 200, message: 'Authenticated user profile', data: req.oidc.user })
+      res.status(200).json(json)
+    } catch (error) {
+      const json = controller.errorHandler(req, res, error)
+      res.status(json.status).json(json)
+    }
   })
 
 router.route('/userinfo')
   .get(async (req, res) => {
-    const userinfo = await req.oidc.fetchUserInfo()
-    res.json(userinfo)
+    try {
+      const data = await req.oidc.fetchUserInfo()
+      const json = controller.formatResponse(req, res, { status: 200, message: 'Authenticated user info', data })
+      res.status(200).json(json)
+    } catch (error) {
+      const json = controller.errorHandler(req, res, error)
+      res.status(json.status).json(json)
+    }
   })

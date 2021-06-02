@@ -24,7 +24,7 @@ app.use(
 
 // set up routes
 app.use('/', require('./routes/views'))
-app.use('/oauth', requiresAuth(), require('./routes/oauth'))
+app.use('/api/v1/oauth', requiresAuth(), require('./routes/oauth'))
 app.use('/api/v1/quotes', requiresAuth(), require('./routes/quotes'))
 app.use('/', require('./routes/errors'))
 

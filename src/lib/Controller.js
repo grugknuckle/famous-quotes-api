@@ -71,7 +71,8 @@ class Controller {
     const stat = Controller.httpCodes[status]
     const response = {
       method: req.method.toUpperCase(),
-      resource: req.baseUrl,
+      controler: this.name,
+      resource: req.baseUrl || '/',
       success: stat.success,
       status,
       statusText: stat.text,
