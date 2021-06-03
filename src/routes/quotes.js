@@ -11,7 +11,6 @@ module.exports = router
 
 router.route('/')
   .get(async (req, res) => {
-    console.log(service.model)
     try {
       const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })

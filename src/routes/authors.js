@@ -24,6 +24,7 @@ router.route('/')
 
 router.route('/:id')
   .get(async (req, res) => {
+    console.log(service.model)
     try {
       const { status, data, message } = await service.findById(req.params.id)
       const json = controller.formatResponse(req, res, { status, data, message })
