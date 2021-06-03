@@ -10,8 +10,8 @@ async function main() {
 
   const matchedQuotes = []
   for (let quote of quotes) {
-    const found = authors.find(a => a.fullName == quote.author)
-    const authorid = found ? found.id : null
+    const author = authors.find(a => a.fullName == quote.author)
+    const authorid = author ? author.id : null
     if (authorid) {
       quote.author = authorid
       matchedQuotes.push(quote)
