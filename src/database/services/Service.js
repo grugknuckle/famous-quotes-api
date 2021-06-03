@@ -16,7 +16,7 @@ class Service {
     const found = await this.model.findById(id)
     const status = found ? 200 : 404
     const message = found ? `Found document with id=${id}` : `Document with id=${id} not found.`
-    const data = found.format() ||  {}
+    const data = found ? found.format() :  {}
     return { status, message, data }
   }
   
