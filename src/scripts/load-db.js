@@ -9,7 +9,7 @@ main()
 async function main() {
   const database = new Database(process.env.DB_CONNECTION_STRING)
   await database.connect()
-  // await loadData(AuthorModel, 'authors.json')
+  await loadData(AuthorModel, 'authors.json')
   await loadData(QuoteModel, 'quotes.json')
   await database.disconnect()
   console.log('DONE !')
