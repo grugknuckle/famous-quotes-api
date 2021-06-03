@@ -7,14 +7,10 @@ class QuoteService extends Service {
   }
  
   async findById(id) {
-    const found = await this.model.findById(id)
-      // .populate({ path: 'author' })
-      // .exec()
-    // const author = await AuthorModel.findById(found.author)
+    const found = await this.model.findById(id).populate({ path: 'author' })
     const status = found ? 200 : 404
     const message = found ? `Found document with id=${id}` : `Document with id=${id} not found.`
-    let data = found.format() ||  {}
-    // data.author = author.format()
+    let data = found ? found.format() : {}
     return { status, message, data }
   }
 }

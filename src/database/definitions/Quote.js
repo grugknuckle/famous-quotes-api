@@ -35,7 +35,7 @@ class Quote {
       filter.text = { $regex: `${query.text}`, $options: 'i' }
     }
     if (query.author) {
-      filter.author = { $regex: query.author, $options: 'i' }
+      filter.author = query.author
     }
     if (query.citation) {
       filter.citation = { $regex: query.citation, $options: 'i' }
@@ -46,9 +46,12 @@ class Quote {
     const options = {
       page: parseInt(query.page ?? 1),
       limit: parseInt(query.limit ?? 50),
-      populate: 'author'
     }
-
+    if (query.populate && (query.populate.toUpperCase() == 'T')) {
+      options.populate = 'author'
+    } else if (query.populate && [ 'author' ].includes(query.populate.toLowerCase())) {
+      options.populate = query.populate
+    }
     return { filter, options }
   }
 
