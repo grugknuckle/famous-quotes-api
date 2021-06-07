@@ -7,8 +7,9 @@
   "license": "ISC",
   "scripts": {
     "start": "node startup.js prod",
-    "start-dev": "nodemon startup.js dev",
-    "start-local": "nodemon startup.js local",
+    "dev": "nodemon startup.js dev",
+    "local": "nodemon startup.js local",
+    "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "load-db": "node ./src/scripts/load-db.js",
     "clear-db": "node ./src/scripts/clear-db.js"
@@ -34,6 +35,7 @@
     "npm": "^6.14.13"
   },
   "devDependencies": {
+    "cypress": "^7.4.0",
     "dotenv": "^8.6.0",
     "jest": "^27.0.1",
     "jest-express": "^1.12.0",
