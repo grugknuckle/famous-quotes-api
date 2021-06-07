@@ -1,4 +1,4 @@
-const { content } = require('./../responses')
+const { content } = require('../responses')
 
 module.exports = {
   '/api/v1/quotes': {
