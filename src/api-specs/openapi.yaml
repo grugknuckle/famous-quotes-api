@@ -1,0 +1,591 @@
+openapi: "3.0.3"
+info:
+  title: "Famous Quotations API"
+  description: "# Famous Quotations API\r\n"
+  termsOfService: "undefined/terms"
+  contact:
+    name: "Aaron Wolbach"
+    email: "aaron.wolbach@gmail.com"
+    url: "undefined/support"
+  license:
+    name: "UNLICENSED"
+    url: "https://choosealicense.com/licenses/"
+  version: "1.0.1"
+servers:
+  - url: "https://adawg.production/api/v1"
+    description: "Production server"
+  - url: "https://localhost:5000/api/v1"
+    description: "Local Development server"
+paths:
+  /api/v1/quotes:
+    get:
+      tags:
+        - "Quotes"
+      summary: "Search Quotes by query"
+      description: "Find a list quotes which match the query parameters passed in the url"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  method:
+                    type: "string"
+                    description: "The HTTP method used in the request."
+                  controller:
+                    type: "string"
+                    description: "The name of the controller which responded to the request."
+                  resource:
+                    type: "string"
+                    description: "The URL of the requested resource."
+                  success:
+                    type: "boolean"
+                    description: "Was the request successful?"
+                  status:
+                    type: "integer"
+                    description: "The HTTP status code"
+                  statusText:
+                    type: "string"
+                    description: "A description of the http status code."
+                  message:
+                    type: "string"
+                    description: "A description of the the action taken by the NetSuite server."
+                  data:
+                    $ref: "#/components/schemas/Paginated"
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+  /api/v1/quotes/{id}:
+    get:
+      tags:
+        - "Quotes"
+      summary: "Find Quote by ID"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      description: "Finds a Quote document that has the passed id."
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  method:
+                    type: "string"
+                    description: "The HTTP method used in the request."
+                  controller:
+                    type: "string"
+                    description: "The name of the controller which responded to the request."
+                  resource:
+                    type: "string"
+                    description: "The URL of the requested resource."
+                  success:
+                    type: "boolean"
+                    description: "Was the request successful?"
+                  status:
+                    type: "integer"
+                    description: "The HTTP status code"
+                  statusText:
+                    type: "string"
+                    description: "A description of the http status code."
+                  message:
+                    type: "string"
+                    description: "A description of the the action taken by the NetSuite server."
+                  data:
+                    $ref: "#/components/schemas/Paginated"
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+    put:
+      tags:
+        - "Quotes"
+      summary: "Update Quote"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      description: "Describe the columns of the table with the passed table name."
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  method:
+                    type: "string"
+                    description: "The HTTP method used in the request."
+                  controller:
+                    type: "string"
+                    description: "The name of the controller which responded to the request."
+                  resource:
+                    type: "string"
+                    description: "The URL of the requested resource."
+                  success:
+                    type: "boolean"
+                    description: "Was the request successful?"
+                  status:
+                    type: "integer"
+                    description: "The HTTP status code"
+                  statusText:
+                    type: "string"
+                    description: "A description of the http status code."
+                  message:
+                    type: "string"
+                    description: "A description of the the action taken by the NetSuite server."
+                  data:
+                    $ref: "#/components/schemas/Paginated"
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+components:
+  schemas:
+    Quote:
+      type: "object"
+      description: "A Quote document"
+      required:
+        - "text"
+        - "author"
+      properties:
+        id:
+          type: "string"
+          readOnly: true
+          description: "The unique identifier of this document."
+        text:
+          type: "string"
+          description: "The acutall text of the document."
+        author:
+          type:
+            - "string"
+            - "object"
+          description: "Either the unique identifier for an existing Author document, or an object representing that Author."
+        citation:
+          type: "string"
+          description: "The original reference to where this quotation was found?"
+        source:
+          type: "string"
+          description: "The book, article, paper or speech that this quote is recorded from."
+        tags:
+          type: "string"
+          description: "A list of tags that describe the topic of the quotation."
+          items:
+            type: "string"
+        likes:
+          type: "integer"
+          description: "The running count of likes this quote has. Not a scientific measure."
+        dislikes:
+          type: "integer"
+          description: "The running count of dislikes this quote has. Not a scientific measure."
+        createdAt:
+          type: "string"
+          readOnly: true
+          description: "The date and time that this document was added to the database."
+        updatedAt:
+          type: "string"
+          readOnly: true
+          description: "The data and time that this document was last updated."
+    Author:
+      type: "object"
+      description: "An Author document"
+      required:
+        - "fullName"
+      properties:
+        id:
+          type: "string"
+          readOnly: true
+          description: "The unique identifier of this document."
+        fullName:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        middleName:
+          type: "string"
+        born:
+          type:
+            - "string"
+            - "null"
+          description: "The date that the author was born, or null."
+        died:
+          type:
+            - "string"
+            - "null"
+          description: "The date that the author died, or null."
+        profession:
+          type: "string"
+          description: "A description of the author's profession."
+        bio:
+          type: "string"
+          description: "A short biography of the author."
+        reference:
+          type: "string"
+          description: "The source (or sources) of information in this document."
+        createdAt:
+          type: "string"
+          readOnly: true
+          description: "The date and time that this document was added to the database."
+        updatedAt:
+          type: "string"
+          readOnly: true
+          description: "The data and time that this document was last updated."
+    Paginated:
+      type: "object"
+      description: ""
+      properties:
+        docs:
+          type: "array"
+          description: "List of documents matching the query."
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/Quote"
+              - $ref: "#/components/schemas/Author"
+        totalDocs:
+          type: "integer"
+          description: ""
+        limit:
+          type: "integer"
+          description: ""
+        totalPages:
+          type: "integer"
+          description: ""
+        page:
+          type: "integer"
+          description: ""
+        pagingCounter:
+          type: "integer"
+          description: ""
+        hasPrevPage:
+          type: "boolean"
+          description: ""
+        hasNextPage:
+          type: "boolean"
+          description: ""
+        prevPage:
+          type:
+            - "integer"
+            - "null"
+          description: ""
+        nextPage:
+          type:
+            - "integer"
+            - "null"
+          description: ""
+  parameters:
+    id:
+      name: "id"
+      in: "path"
+      required: true
+      description: "Internal ID of the requested resource"
+      schema:
+        type: "string"
+      example: "60b9533a479ac9a2804dca7b"
+    limit: {}
+  requestBodies: {}
+  responses:
+    200:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    201:
+      description: "CREATED"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    204:
+      description: "NO CONTENT"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    304:
+      description: "NOT MODIFIED"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    400:
+      description: "BAD REQUEST"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    401:
+      description: "UNAUTHORIZED"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    403:
+      description: "FORBIDDEN"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    404:
+      description: "NOT FOUND"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+    501:
+      description: "NOT IMPLEMENTED"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              method:
+                type: "string"
+                description: "The HTTP method used in the request."
+              controller:
+                type: "string"
+                description: "The name of the controller which responded to the request."
+              resource:
+                type: "string"
+                description: "The URL of the requested resource."
+              success:
+                type: "boolean"
+                description: "Was the request successful?"
+              status:
+                type: "integer"
+                description: "The HTTP status code"
+              statusText:
+                type: "string"
+                description: "A description of the http status code."
+              message:
+                type: "string"
+                description: "A description of the the action taken by the NetSuite server."
+              data:
+                type: "object"
+                description: "An object containing the successful response data."
+tags:
+  - name: "Quotes"
+    description: "A curated collection of meaningful quotes from famous people."
+  - name: "Authors"
+    description: "The people who (allegedly) said the famous words found in the quotes collection."
+x-tagGroups:
+  - name: "Collections"
+    tags:
+      - "Quotes"
+      - "Authors"

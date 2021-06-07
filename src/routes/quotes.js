@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const Controller = require('./../lib/Controller')
-const QuoteService = require('../services/QuoteService')
+const QuoteModel = require('../models/quote.model')
+const Service = require('./../lib/Service')
 
 const controller = new Controller('quotations')
-const service = new QuoteService()
+const service = new Service(QuoteModel)
 module.exports = router
 
 // TODO ... add request validation middleware
@@ -24,7 +25,7 @@ router.route('/')
 router.route('/:id')
   .get(async (req, res) => {
     try {
-      const { status, data, message } = await service.findById(req.params.id)
+      const { status, data, message } = await service.findById(req.params.id, req.query)
       const json = controller.formatResponse(req, res, { status, data, message })
       res.status(status).json(json)
     } catch (error) {

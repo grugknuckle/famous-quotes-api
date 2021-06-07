@@ -46,11 +46,14 @@ class Quote {
     const options = {
       page: parseInt(query.page ?? 1),
       limit: parseInt(query.limit ?? 50),
+      populate: ''
     }
+    
     if (query.populate && (query.populate.toUpperCase() == 'T')) {
+      // should populate all populate-able fields
       options.populate = 'author'
-    } else if (query.populate && [ 'author' ].includes(query.populate.toLowerCase())) {
-      options.populate = query.populate
+    } else if (query.populate && 'author' == query.populate.toLowerCase()) {
+      options.populate = 'author'
     }
     return { filter, options }
   }

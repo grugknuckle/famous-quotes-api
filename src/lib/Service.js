@@ -1,3 +1,5 @@
+const { query } = require("winston")
+
 class Service {
   constructor(model) {
     this._model = model
@@ -12,8 +14,9 @@ class Service {
     return { status: 200, message: `found ${found.totalDocs} documents matching your query`, data: found }
   }
   
-  async findById(id) {
-    const found = await this.model.findById(id)
+  async findById(id, query) {
+    const { options } = this.model.parseQuery(query)
+    const found = await this.model.findById(id).populate({ path: options.populate })
     const status = found ? 200 : 404
     const message = found ? `Found document with id=${id}` : `Document with id=${id} not found.`
     const data = found ? found.format() :  {}

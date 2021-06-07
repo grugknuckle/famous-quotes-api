@@ -50,6 +50,7 @@ class Author {
     const options = {
       page: parseInt(query.page ?? 1),
       limit: parseInt(query.limit ?? 50),
+      populate: ''
     }
     return { filter, options }
   }
