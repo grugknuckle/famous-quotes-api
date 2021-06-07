@@ -6,6 +6,11 @@ module.exports = {
       tags: [ 'Quotes' ],
       summary: 'Search Quotes by query',
       description: `Find a list quotes which match the query parameters passed in the url`,
+      parameters: [
+        { "$ref": "#/components/parameters/populate" },
+        { "$ref": "#/components/parameters/limit" },
+        { "$ref": "#/components/parameters/page" },
+      ],
       responses: {
         '200': { description: 'OK', content: content({ '$ref': '#/components/schemas/Paginated' }) },
         '400': { '$ref': '#/components/responses/400' },
@@ -26,7 +31,7 @@ module.exports = {
       ],
       description: `Finds a Quote document that has the passed id.`,
       responses: {
-        '200': { description: 'OK', content: content({ '$ref': '#/components/schemas/Paginated' }) },
+        '200': { description: 'OK', content: content({ '$ref': '#/components/schemas/Quote' }) },
         '400': { '$ref': '#/components/responses/400' },
         '401': { '$ref': '#/components/responses/401' },
         '403': { '$ref': '#/components/responses/403' },
