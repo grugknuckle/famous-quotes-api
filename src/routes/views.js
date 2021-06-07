@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const Controller = require('./../lib/Controller')
 const controller = new Controller('home')
-const specification = require('./../api-specs')
+
+const path = require('path')
+const specification = require('./../openapi-specs')
 
 module.exports = router
 
@@ -29,6 +31,18 @@ router
     try {
       const status = 200
       res.status(status).json(specification)
+    } catch (error) {
+      const json = controller.errorHandler(req, res, error)
+      res.status(json.status).json(json)
+    }
+  })
+
+// TODO: if the user is authenticated and has an administrator role, show the FULL api-specification.
+router
+  .route('/documentation')
+  .get((req, res) => {
+    try {
+      res.sendFile(path.join(__dirname, '/../openapi-specs/redoc.html'))
     } catch (error) {
       const json = controller.errorHandler(req, res, error)
       res.status(json.status).json(json)
