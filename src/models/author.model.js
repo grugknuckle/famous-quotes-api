@@ -1,6 +1,6 @@
 const mongoosePaginate = require('mongoose-paginate-v2')
 const { Schema, model } = require('mongoose')
-const Author = require('./../definitions/Author')
+const Author = require('./../lib/Author')
 
 //https://mongoosejs.com/docs/schematypes.html#schematype-options
 

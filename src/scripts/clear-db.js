@@ -1,8 +1,8 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../../.env.prod') })
 const Database = require('../lib/Database')
-const QuoteModel = require('../database/models/quote.model')
-const AuthorModel = require('../database/models/author.model')
+const QuoteModel = require('../models/quote.model')
+const AuthorModel = require('../models/author.model')
 
 killEmAll()
 

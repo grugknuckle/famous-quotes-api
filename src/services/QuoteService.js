@@ -1,6 +1,6 @@
-const Service = require('./Service')
-const QuoteModel = require('./../models/quote.model')
-const AuthorModel = require('./../models/author.model')
+const Service = require('../lib/Service')
+const QuoteModel = require('../models/quote.model')
+
 class QuoteService extends Service {
   constructor() {
     super(QuoteModel)

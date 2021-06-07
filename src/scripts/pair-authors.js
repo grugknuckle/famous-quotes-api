@@ -1,8 +1,8 @@
 const path = require('path')
 const jsonfile = require('jsonfile')
 // require('dotenv').config({ path: path.join(__dirname, '../../.env.prod') })
-const authors = require('./../database/backup/authors.json')
-const quotes = require('./../database/backup/quotes.json')
+const authors = require('./../backup/authors.json')
+const quotes = require('./../backup/quotes.json')
 
 main()
 
@@ -21,6 +21,6 @@ async function main() {
     }
   }
 
-  const result = await jsonfile.writeFile(path.join(__dirname, './../database/backup/quotes-matched.json'), matchedQuotes, { spaces: 2 })
+  const result = await jsonfile.writeFile(path.join(__dirname, './../backup/quotes-matched.json'), matchedQuotes, { spaces: 2 })
   console.log(result)
 }

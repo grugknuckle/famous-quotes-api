@@ -1,7 +1,7 @@
 // const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 const { Schema, model } = require('mongoose')
-const Quote = require('./../definitions/Quote')
+const Quote = require('./../lib/Quote')
 
 //https://mongoosejs.com/docs/schematypes.html#schematype-options
 

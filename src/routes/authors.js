@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const Controller = require('./../lib/Controller')
-const AuthorModel = require('../database/models/author.model')
-const Service = require('../database/services/Service')
+const AuthorModel = require('../models/author.model')
+const Service = require('./../lib/Service')
 
 const controller = new Controller('authors')
 const service = new Service(AuthorModel)

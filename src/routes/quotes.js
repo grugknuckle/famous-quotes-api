@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Controller = require('./../lib/Controller')
-const QuoteService = require('../database/services/QuoteService')
+const QuoteService = require('../services/QuoteService')
 
 const controller = new Controller('quotations')
 const service = new QuoteService()

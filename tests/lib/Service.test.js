@@ -2,8 +2,8 @@
 // const mongoDB = 'mongodb://127.0.0.1/test_database'
 // mongoose.connect(mongoDB)
 
-const Service = require('../../../src/database/services/Service')
-const QuoteModel = require('../../../src/database/models/quote.model')
+const Service = require('../../../src/lib/Service')
+const Quote = require('../../src/lib/Quote')
 
 const sample = {
   text: 'You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.',
@@ -13,6 +13,14 @@ const sample = {
   tags: [],
   likes: 0,
   dislikes: 0
+}
+
+const mockModel = {
+  parseQuery: Quote.parseQuery,
+  parseInput: Quote.parseInput,
+  jsonSchema: Quote.jsonSchema,
+  paginate: jest.fn(),
+  
 }
 
 describe('Service class ...', () => {
@@ -27,8 +35,10 @@ describe('Service class ...', () => {
   })
 
   describe('instance methods', () => {
-    let service = new Service(QuoteModel)
-    beforeAll(() => {})
+    let service
+    beforeEach(() => {
+      service = new Service(mockModel)
+    })
 
     it('The Service is instantiated', () => {
       expect(service).toBeDefined()
@@ -42,7 +52,7 @@ describe('Service class ...', () => {
         expect(Service.model).not.toBeDefined()
       })
       it('returns the parameter input to the class constructor', () => {
-        expect(service.model).toEqual(QuoteModel)
+        expect(service.model).toEqual(mockModel)
       })
     })
 

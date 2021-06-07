@@ -1,8 +1,8 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../../.env.prod') })
 const Database = require('../lib/Database')
-const QuoteModel = require('../database/models/quote.model')
-const AuthorModel = require('../database/models/author.model')
+const QuoteModel = require('../models/quote.model')
+const AuthorModel = require('../models/author.model')
 
 main()
 
@@ -18,7 +18,7 @@ async function main() {
 }
 
 async function loadAuthors() {
-  const dataset = require(`./../database/backup/authors.json`)
+  const dataset = require(`./../backup/authors.json`)
   console.log(`preparing to load ${dataset.length} ${AuthorModel.name} documents from the authors.json dataset ...`)
 
   for (let datapoint of dataset) {
@@ -35,7 +35,7 @@ async function loadAuthors() {
 
 
 async function loadQuotes() {
-  const dataset = require(`./../database/backup/quotes.json`)
+  const dataset = require(`./../backup/quotes.json`)
   console.log(`preparing to load ${dataset.length} ${QuoteModel.name} documents from the quotes.json dataset ...`)
 
   for (let datapoint of dataset) {
