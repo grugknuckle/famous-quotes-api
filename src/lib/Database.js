@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const { logger } = require('./Logger')
 /**
  * Database class manages connections to the MongoDB database.
  * 
@@ -25,22 +25,22 @@ class Database {
    */
   async connect() {
     try {
-      console.log(`Connecting to database: ${this.name} ...`)
+      logger.info(`Connecting to database: ${this.name} ...`)
       await mongoose.connect(this.uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
       const connection = mongoose.connection
 
       connection.once('connected', () => {
-        console.log(`Established connection database: ${this.name}`)
+        logger.info(`Established connection database: ${this.name}`)
       })
       connection.once('disconnected', () => {
-        console.log(`Closed connection to database: ${this.name}`)
+        logger.info(`Closed connection to database: ${this.name}`)
       })
       connection.once('error', err => {
-        console.log(`Database connection error for ${this.name} database: error ${err}`)
+        logger.info(`Database connection error for ${this.name} database: error ${err}`)
       })
       this._connection = connection
     } catch (error) {
-      console.log(error)
+      logger.error(error)
       throw error
     }
   }
@@ -50,10 +50,10 @@ class Database {
    */
   async disconnect() {
     try {
-      console.log(`Disconnecting from database: ${this.name} ...`)
+      logger.info(`Disconnecting from database: ${this.name} ...`)
       await this.connection.close()
     } catch (error) {
-      console.log(error)
+      logger.error(error)
       throw error
     }
   }
