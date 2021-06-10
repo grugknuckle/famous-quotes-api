@@ -1,6 +1,6 @@
 const path = require('path')
 const mode = process.argv[2]
-
+const { logger } = require('./src/lib/Logger') 
 switch(mode) {
   case 'dev':
     require('dotenv').config({ path: path.join(__dirname, './.env.dev') })
@@ -23,7 +23,14 @@ startup(app)
 async function startup(app) {
   // connect to database
   const database = new Database(process.env.DB_CONNECTION_STRING)
-  await database.connect()
+  try {
+    await database.connect()
+  } catch (error) {
+    logger.warn('An error occurred while connecting to database.')
+    logger.error(error)
+  }
+  
+  
   
   // gracefully handle shutdown
   process.on('SIGTERM', async () => { await shutdown(database) })
@@ -32,8 +39,8 @@ async function startup(app) {
   const port = process.env.PORT || 5000
   // listen to requests
   app.listen(port, () => {
-    console.log(`Application started in ${process.env.MODE} mode`)
-    console.log(`Express.js server is running on port: ${port}`)
+    logger.info(`Application started in ${process.env.MODE} mode`)
+    logger.info(`Express.js server is running on port: ${port}`)
   })
 }
 
@@ -42,11 +49,11 @@ async function startup(app) {
  */
 async function shutdown(database) {
   try {
-    console.log(`Initiate graceful shutdown ...`)
+    logger.info(`Initiate graceful shutdown ...`)
     await database.disconnect()
-    console.log('Shutdown complete.')
+    logger.info('Shutdown complete.')
   } catch (error) {
-    console.log('Graceful shutdown wasn\'t graceful ...')
+    logger.info('Graceful shutdown wasn\'t graceful ...')
     console.error(error)
   }
   process.kill(process.pid, 'SIGUSR2')
