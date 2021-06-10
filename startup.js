@@ -9,7 +9,7 @@ switch(mode) {
     require('dotenv').config({ path: path.join(__dirname, './.env.local') })
     break
   default:
-    require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
+    // require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
 }
 
 const app = require('./src/app.js')
