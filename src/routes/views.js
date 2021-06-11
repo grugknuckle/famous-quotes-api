@@ -7,17 +7,13 @@ const specification = require('./../openapi-specs')
 
 module.exports = router
 
+// TODO: if the user is authenticated and has an administrator role, show the FULL api-specification.
 router
   .route('/')
   .get((req, res) => {
+    // req.oidc.isAuthenticated()
     try {
-      const status = 200
-      const message = 'Hello from the Famous Quotations API!'
-      const data = {
-        isAuthenticated: req.oidc.isAuthenticated()
-      }
-      const json = controller.formatResponse(req, res, { status, message, data })
-      res.status(status).json(json)
+      res.sendFile(path.join(__dirname, '/../openapi-specs/redoc.html'))
     } catch (error) {
       const json = controller.errorHandler(req, res, error)
       res.status(json.status).json(json)
@@ -28,6 +24,7 @@ router
 router
   .route('/api/v1/specification')
   .get((req, res) => {
+    // req.oidc.isAuthenticated()
     try {
       const status = 200
       res.status(status).json(specification)
@@ -36,15 +33,4 @@ router
       res.status(json.status).json(json)
     }
   })
-
-// TODO: if the user is authenticated and has an administrator role, show the FULL api-specification.
-router
-  .route('/documentation')
-  .get((req, res) => {
-    try {
-      res.sendFile(path.join(__dirname, '/../openapi-specs/redoc.html'))
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
-    }
-  })
+  
