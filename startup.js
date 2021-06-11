@@ -1,6 +1,11 @@
 const path = require('path')
 const mode = process.argv[2]
 
+/**
+ * HEROKU BEST PRACTICES
+ * https://devcenter.heroku.com/articles/node-best-practices
+ */
+
 switch(mode) {
   case 'dev':
     require('dotenv').config({ path: path.join(__dirname, './.env.dev') })
