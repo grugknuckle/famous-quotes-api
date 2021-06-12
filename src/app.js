@@ -11,11 +11,12 @@ const app = express()
 
 // middleware ...
 app.use(express.json()) // body parse json
-app.use(routerLogger)   // express-winston logger
-// app.use(cors())         // https://www.npmjs.com/package/cors ... TODO: decide if you want a whitelist or just have a global API.
 app.use(helmet())       // https://www.npmjs.com/package/helmet
+app.use(routerLogger)   // express-winston logger
+// app.use(cors())         // TODO: decide if you want a whitelist or just have a global API.
 
-// Auth0 middleware
+
+// Auth0 middleware for OIDC ... (for protecting admin views)
 app.use(
   auth({
     authRequired: false,
@@ -28,7 +29,8 @@ app.use(
   })
 )
 
-const jwtCheck = jwt({
+// JWT checker
+const verifyJWT = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
     rateLimit: true,
@@ -44,8 +46,8 @@ const jwtCheck = jwt({
 app.use('/', require('./routes/views'))
 // app.use('/administrator', requiresAuth(), require('./routes/admin'))
 app.use('/api/v1/oauth', requiresAuth(), require('./routes/oauth'))
-app.use('/api/v1/quotes', cors(), jwtCheck, require('./routes/quotes'))
-app.use('/api/v1/authors', cors(), jwtCheck, require('./routes/authors'))
+app.use('/api/v1/quotes', cors(), verifyJWT, require('./routes/quotes'))
+app.use('/api/v1/authors', cors(), verifyJWT, require('./routes/authors'))
 app.use('/', require('./routes/errors'))
 
 // express-winston errorLogger AFTER the other routes have been defined.
