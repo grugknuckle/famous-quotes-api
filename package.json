@@ -9,11 +9,11 @@
     "start": "node startup.js prod",
     "dev": "nodemon startup.js dev",
     "local": "nodemon startup.js local",
-    "build-spec": "node ./src/scripts/build-spec.js",
+    "build-spec": "node ./server/scripts/build-spec.js",
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
-    "load-db": "node ./src/scripts/load-db.js",
-    "clear-db": "node ./src/scripts/clear-db.js"
+    "load-db": "node ./server/scripts/load-db.js",
+    "clear-db": "node ./server/scripts/clear-db.js"
   },
   "repository": {
     "type": "git",
