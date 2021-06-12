@@ -9,7 +9,7 @@ const app = express()
 // middleware ...
 app.use(express.json()) // body parse json
 app.use(routerLogger)   // express-winston logger
-app.use(cors())         // https://www.npmjs.com/package/cors ... TODO: decide if you want a whitelist or just have a global API.
+// app.use(cors())         // https://www.npmjs.com/package/cors ... TODO: decide if you want a whitelist or just have a global API.
 app.use(helmet())       // https://www.npmjs.com/package/helmet
 
 // Auth0 middleware
@@ -29,8 +29,8 @@ app.use(
 // set up routes
 app.use('/', require('./routes/views'))
 app.use('/api/v1/oauth', requiresAuth(), require('./routes/oauth'))
-app.use('/api/v1/quotes', requiresAuth(), require('./routes/quotes'))
-app.use('/api/v1/authors', requiresAuth(), require('./routes/authors'))
+app.use('/api/v1/quotes', requiresAuth(), cors(), require('./routes/quotes'))
+app.use('/api/v1/authors', requiresAuth(), cors(), require('./routes/authors'))
 app.use('/', require('./routes/errors'))
 
 // express-winston errorLogger AFTER the other routes have been defined.
