@@ -1,8 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
-const { auth, requiresAuth } = require('express-openid-connect')
-const { routerLogger, errorLogger } = require('./lib/Logger')
+
+const { auth, requiresAuth } = require('express-openid-connect')  // for protecting admin views
+const jwt = require('express-jwt')
+const jwks = require('jwks-rsa')                                  // for protecting api endpoints
+const { routerLogger, errorLogger } = require('./lib/Logger')     // for logging / monitoring
 
 const app = express()
 
@@ -13,7 +16,6 @@ app.use(routerLogger)   // express-winston logger
 app.use(helmet())       // https://www.npmjs.com/package/helmet
 
 // Auth0 middleware
-// examples ... https://github.com/auth0/express-openid-connect/blob/master/EXAMPLES.md
 app.use(
   auth({
     authRequired: false,
@@ -26,11 +28,24 @@ app.use(
   })
 )
 
+const jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `${process.env.AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`
+  }),
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: process.env.AUTH0_ISSUER_BASE_URL,
+  algorithms: ['RS256']
+})
+
 // set up routes
 app.use('/', require('./routes/views'))
+// app.use('/administrator', requiresAuth(), require('./routes/admin'))
 app.use('/api/v1/oauth', requiresAuth(), require('./routes/oauth'))
-app.use('/api/v1/quotes', cors(), require('./routes/quotes'))
-app.use('/api/v1/authors', cors(), require('./routes/authors'))
+app.use('/api/v1/quotes', cors(), jwtCheck, require('./routes/quotes'))
+app.use('/api/v1/authors', cors(), jwtCheck, require('./routes/authors'))
 app.use('/', require('./routes/errors'))
 
 // express-winston errorLogger AFTER the other routes have been defined.
