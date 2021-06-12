@@ -1,6 +1,8 @@
+const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
+const serveStatic = require('serve-static')
 
 const { auth, requiresAuth } = require('express-openid-connect')  // for protecting admin views
 const jwt = require('express-jwt')
@@ -11,10 +13,11 @@ const app = express()
 
 // middleware ...
 app.use(express.json()) // body parse json
-app.use(helmet())       // https://www.npmjs.com/package/helmet
 app.use(routerLogger)   // express-winston logger
 // app.use(cors())         // TODO: decide if you want a whitelist or just have a global API.
-
+app.use(helmet({        // https://www.npmjs.com/package/helmet
+  contentSecurityPolicy: false
+}))
 
 // Auth0 middleware for OIDC ... (for protecting admin views)
 app.use(
@@ -41,6 +44,9 @@ const verifyJWT = jwt({
   issuer: process.env.AUTH0_ISSUER_BASE_URL,
   algorithms: ['RS256']
 })
+
+// serve static assets
+app.use('/public', serveStatic(path.join(__dirname, 'public')))
 
 // set up routes
 app.use('/', require('./routes/views'))
