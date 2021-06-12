@@ -1,4 +1,4 @@
-const Database = require('../../src/lib/Database.js')
+const Database = require('../../server/lib/Database.js')
 
 describe('Database class ...', () => {
   

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const mongoDB = 'mongodb://127.0.0.1/test_database'
 mongoose.connect(mongoDB)
 
-const QuoteModel = require('./../../../src/models/quote.model')
+const QuoteModel = require('./../../../server/models/quote.model')
 const sample = {
   text: 'You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.',
   author: 'Abraham Lincoln',
