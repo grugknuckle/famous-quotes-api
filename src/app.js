@@ -1,4 +1,6 @@
 const express = require('express')
+const cors = require('cors')
+const helmet = require('helmet')
 const { auth, requiresAuth } = require('express-openid-connect')
 const { routerLogger, errorLogger } = require('./lib/Logger')
 
@@ -7,6 +9,8 @@ const app = express()
 // middleware ...
 app.use(express.json()) // body parse json
 app.use(routerLogger)   // express-winston logger
+app.use(cors())         // https://www.npmjs.com/package/cors ... TODO: decide if you want a whitelist or just have a global API.
+app.use(helmet())       // https://www.npmjs.com/package/helmet
 
 // Auth0 middleware
 // examples ... https://github.com/auth0/express-openid-connect/blob/master/EXAMPLES.md
