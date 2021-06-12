@@ -6,12 +6,16 @@ const Service = require('./../lib/Service')
 
 const controller = new Controller('quotations')
 const service = new Service(QuoteModel)
+const options = {
+  customScopeKey: 'permissions'
+}
 module.exports = router
 
 // TODO ... add request validation middleware (e.g. request body validation)
 
 router.route('/')
-  .get(checkJWTScopes([ 'read:quotes' ], {}), async (req, res) => {
+  .all(checkJWTScopes([ 'read:quotes' ], options))
+  .get(async (req, res) => {
     try {
       const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -23,7 +27,7 @@ router.route('/')
   })
 
 router.route('/:id')
-  .get(checkJWTScopes([ 'read:quotes' ], {}), async (req, res) => {
+  .get(checkJWTScopes([ 'read:quotes' ], options), async (req, res) => {
     try {
       const { status, data, message } = await service.findById(req.params.id, req.query)
       const json = controller.formatResponse(req, res, { status, data, message })
@@ -33,7 +37,7 @@ router.route('/:id')
       res.status(json.status).json(json)
     }
   })
-  .put(checkJWTScopes([ 'update:quotes' ], {}), async (req, res) => {
+  .put(checkJWTScopes([ 'update:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.update(req.body, req.params.id)     
       const json = controller.formatResponse(req, res, { status, data, message })
@@ -43,7 +47,7 @@ router.route('/:id')
       res.status(json.status).json(json)
     }
   })
-  .delete(checkJWTScopes([ 'delete:quotes' ], {}), async (req, res) => {
+  .delete(checkJWTScopes([ 'delete:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.remove(req.params.id)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -56,7 +60,7 @@ router.route('/:id')
   
 
 router.route('/add')
-  .post(checkJWTScopes([ 'create:quotes' ], {}), async (req, res) => {
+  .post(checkJWTScopes([ 'create:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.create(req.body)
       const json = controller.formatResponse(req, res, { status, data, message })
