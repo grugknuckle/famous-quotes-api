@@ -11,13 +11,8 @@ module.exports = router
 router
   .route('/')
   .get((req, res) => {
-    // req.oidc.isAuthenticated()
-    try {
-      res.sendFile(path.join(__dirname, '/../openapi-specs/redoc.html'))
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
-    }
+    // server/openapi-specs/redoc.html
+    res.sendFile(path.join(__dirname, '../views/redoc.html'))
   })
 
 // TODO: if the user is authenticated and has an administrator role, show the FULL api-specification.

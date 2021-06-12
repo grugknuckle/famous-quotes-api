@@ -1,15 +1,9 @@
-# Famous Quotations API
+# Introduction
 
 This API serves a collated collection of quotations to your applications.
 
-# Introduction
-This API is documented in **OpenAPI format** and is based on
-[Petstore sample](http://petstore.swagger.io/) provided by [swagger.io](http://swagger.io) team.
-It was **extended** to illustrate features of [generator-openapi-repo](https://github.com/Rebilly/generator-openapi-repo)
-tool and [ReDoc](https://github.com/Redocly/redoc) documentation. In addition to standard
-OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/master/docs/redoc-vendor-extensions.md).
-
 # OpenAPI Specification
+
 This API is documented in **OpenAPI format**. 
 
 # Cross-Origin Resource Sharing
