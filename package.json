@@ -9,11 +9,11 @@
     "start": "node startup.js prod",
     "dev": "nodemon startup.js dev",
     "local": "nodemon startup.js local",
-    "build-spec": "node ./src/scripts/build-spec.js",
+    "build-spec": "node ./server/scripts/build-spec.js",
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
-    "load-db": "node ./src/scripts/load-db.js",
-    "clear-db": "node ./src/scripts/clear-db.js"
+    "load-db": "node ./server/scripts/load-db.js",
+    "clear-db": "node ./server/scripts/clear-db.js"
   },
   "repository": {
     "type": "git",
@@ -21,15 +21,20 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.4.1",
     "express-openid-connect": "^2.4.0",
     "express-winston": "^4.1.0",
+    "helmet": "^4.6.0",
     "jsonschema": "^1.4.0",
-    "moment": "^2.29.1",
+    "jwks-rsa": "^2.0.3",
     "mongoose": "^5.12.0",
     "mongoose-paginate-v2": "^1.3.18",
     "nodemon": "^2.0.7",
+    "serve-static": "^1.14.1",
     "winston": "^3.3.3"
   },
   "engines": {
@@ -38,7 +43,6 @@
   },
   "devDependencies": {
     "cypress": "^7.4.0",
-    
     "jest": "^27.0.1",
     "jest-express": "^1.12.0",
     "jsdoc-to-markdown": "^7.0.1",

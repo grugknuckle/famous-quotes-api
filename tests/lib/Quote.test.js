@@ -1,4 +1,4 @@
-const Quote = require('../../src/lib/Quote')
+const Quote = require('../../server/lib/Quote')
 
 describe('The Quote class definition ...', () => {
 

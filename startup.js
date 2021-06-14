@@ -1,6 +1,10 @@
 const path = require('path')
 const mode = process.argv[2]
-const { logger } = require('./src/lib/Logger') 
+/**
+ * HEROKU BEST PRACTICES
+ * https://devcenter.heroku.com/articles/node-best-practices
+ */
+
 switch(mode) {
   case 'dev':
     require('dotenv').config({ path: path.join(__dirname, './.env.dev') })
@@ -12,8 +16,9 @@ switch(mode) {
     // require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
 }
 
-const app = require('./src/app.js')
-const Database = require('./src/lib/Database.js')
+const { logger } = require('./server/lib/Logger')
+const app = require('./server/app.js')
+const Database = require('./server/lib/Database.js')
 
 startup(app)
 
@@ -21,6 +26,9 @@ startup(app)
  * Startup the server
  */
 async function startup(app) {
+  logger.info(`starting app in ${mode} mode.`)
+  logger.info(`loaded environment variables from ${process.env.MODE} settings.`)
+
   // connect to database
   const database = new Database(process.env.DB_CONNECTION_STRING)
   try {

@@ -2,8 +2,8 @@
 // const mongoDB = 'mongodb://127.0.0.1/test_database'
 // mongoose.connect(mongoDB)
 
-const Service = require('../../../src/lib/Service')
-const Quote = require('../../src/lib/Quote')
+const Service = require('../../../server/lib/Service')
+const Quote = require('../../server/lib/Quote')
 
 const sample = {
   text: 'You can fool all the people some of the time, and some of the people all the time, but you cannot fool all the people all the time.',

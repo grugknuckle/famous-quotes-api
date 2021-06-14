@@ -1,4 +1,4 @@
-const Controller = require('./../../src/lib/Controller')
+const Controller = require('./../../server/lib/Controller')
 
 describe('Controller class ...', () => {
   describe('constructor', () => {

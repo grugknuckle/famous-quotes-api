@@ -26,10 +26,10 @@ let specification = {
       url: 'https://choosealicense.com/licenses/',
     },
     version: '1.0.1',
-    // 'x-logo': {
-    //   url: '/BETE_Logo_Dark.svg',
-    //   altText: 'BETE Logo'
-    // }
+    'x-logo': {
+      url: '/public/images/logo.svg',
+      altText: 'Quotes-API'
+    }
   },
   servers: [
     {
