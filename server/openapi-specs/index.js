@@ -27,7 +27,7 @@ let specification = {
     },
     version: '1.0.1',
     'x-logo': {
-      url: '/public/images/Quoted-Logo.svg',
+      url: '/public/images/Quoted-Logo-2.svg',
       altText: 'Quotes-API'
     }
   },
