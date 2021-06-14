@@ -15,6 +15,7 @@ class Author {
       profession: this.profession,
       bio: this.bio,
       reference: this.reference,
+      imageURL: this.imageURL,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       revision: this._v
@@ -32,6 +33,7 @@ class Author {
     this.profession = body.profession ?? this.profession
     this.bio = body.bio ?? this.bio
     this.reference = body.reference ?? this.reference
+    this.imageURL = body.imageURL ?? this.imageURL
     this.increment()
   }
 
@@ -65,13 +67,69 @@ class Author {
       died: body.died ?? null,
       profession: body.profession,
       bio: body.bio,
-      reference: body.reference
+      reference: body.reference,
+      imageURL: body.imageURL
     }
     return data
   }
 
   static jsonSchema() {
-    return {}
+    return {
+      type: 'object',
+      description: 'An Author document',
+      required: ['fullName'],
+      properties: {
+        id: { type: 'string', readOnly: true, description: 'The unique identifier of this document.', readOnly: true },
+        fullName: {
+          type: 'string',
+          example: 'Abraham Lincoln'
+        },
+        firstName: {
+          type: 'string',
+          example: 'Abraham'
+        },
+        middleName: {
+          type: 'string',
+          example: ''
+        },
+        lastName: {
+          type: 'string',
+          example: 'Lincoln'
+        },
+        born: {
+          type: ['string', 'null'],
+          description: 'The date that the author was born, or null.',
+          example: '1819-02-12T04:00:00.000Z'
+        },
+        died: {
+          type: ['string', 'null'],
+          description: 'The date that the author died, or null.',
+          example: '1865-04-15T04:00:00.000Z'
+        },
+        profession: {
+          type: 'string',
+          description: 'A description of the author\'s profession.',
+          example: 'President of the United States'
+        },
+        bio: {
+          type: 'string',
+          description: 'A short biography of the author.',
+          example: ''
+        },
+        reference: {
+          type: 'string',
+          description: 'The source (or sources) of information in this document.',
+          example: 'https://en.wikipedia.org/wiki/Abraham_Lincoln'
+        },
+        imageURL: {
+          type: 'string',
+          description: 'The source (or sources) of information in this document.',
+          example: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg/800px-Abraham_Lincoln_O-77_matte_collodion_print.jpg'
+        },
+        createdAt: { type: 'string', readOnly: true, description: 'The date and time that this document was added to the database.' },
+        updatedAt: { type: 'string', readOnly: true, description: 'The data and time that this document was last updated.' },
+      }
+    }
   }
 }
 

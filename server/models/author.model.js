@@ -14,6 +14,7 @@ const structure = {
   profession: { type: String, trim: true },
   bio: { type: String, trim: true },
   reference: { type: String, trim: true },
+  imageURL: { type: String, trim: true }
 }
 const options = { timestamps: true }
 
