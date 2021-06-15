@@ -47,7 +47,8 @@ class Quote {
     const options = {
       page: parseInt(query.page ?? 1),
       limit: parseInt(query.limit ?? 50),
-      populate: ''
+      populate: '',
+      sort: query.sort ?? 'author text'
     }
     
     if (query.populate && (query.populate.toUpperCase() == 'T')) {
