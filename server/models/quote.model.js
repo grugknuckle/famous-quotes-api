@@ -12,7 +12,8 @@ const structure = {
   source: { type: String, required: false },
   tags: { type: [String], required: false, default: [] },
   likes: { type: Number, required: false, min: 0, default: 0 },
-  dislikes: { type: Number, required: false, min: 0, default: 0 }
+  dislikes: { type: Number, required: false, min: 0, default: 0 },
+  rating: { type: Number, required: false, min: 0, max: 5, default: 2.5 }
 }
 const options = {
   timestamps: true,

@@ -13,7 +13,8 @@
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
     "load-db": "node ./server/scripts/load-db.js",
-    "clear-db": "node ./server/scripts/clear-db.js"
+    "clear-db": "node ./server/scripts/clear-db.js",
+    "update-db": "node ./server/scripts/update-db.js"
   },
   "repository": {
     "type": "git",

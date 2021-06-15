@@ -5,11 +5,12 @@
     "firstName": "Mario",
     "middleName": "",
     "lastName": "Cuomo",
-    "born": null,
-    "died": null,
-    "profession": "",
-    "bio": "",
-    "reference": "",
+    "born": "1932-06-15T00:00:00.000Z",
+    "died": "2015-01-01T00:00:00.000Z",
+    "profession": "Governor of New York",
+    "bio": "New York Governor. His parents owned a store when he grew up in Queens, and he attended St. John's Preparatory School. He played professional baseball in the Pittsburgh Pirates organization, but had to quit after an injury. He completed his bachelor's degree at St. John’s University in 1953 and graduated from St. John's University Law School in 1956. He practiced law in Brooklyn and was an Adjunct Professor at St. John's Law School. Cuomo came to prominence in the late 1960s while representing New York City residents whose neighborhoods were threatened by real estate development, which led to his unsuccessful candidacy for the 1974 Democratic Lieutenant Governor’s nomination. Hugh Carey, who won the 1974 Governor's race, appointed Cuomo as Secretary of State in 1975. He ran unsuccessfully for New York City Mayor in 1977, but won the Lieutenant Governorship in 1978. He won the 1982 Governor’s election, and he served three terms. Cuomo became nationally known as a result of his 1984 Democratic National Convention keynote speech, and was considered a likely candidate for President in 1988 and 1992, though he did not run. He was defeated for reelection in 1994, after which he practiced law and authored several books.",
+    "reference": "https://www.findagrave.com/memorial/140758090/mario-cuomo",
+    "imageURL": "https://images.findagrave.com/photos/2015/0/140758090_1420161412.jpg",
     "createdAt": "2021-06-03T22:09:47.867Z",
     "updatedAt": "2021-06-03T22:09:47.867Z"
   },
@@ -19,11 +20,12 @@
     "firstName": "John",
     "middleName": "",
     "lastName": "McCain",
-    "born": null,
-    "died": null,
-    "profession": "",
+    "born": "1936-08-29T00:00:00.000Z",
+    "died": "2018-08-25T00:00:00.000Z",
+    "profession": "U.S. Senator (AZ)",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/John_McCain",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/John_McCain_official_portrait_2009.jpg/220px-John_McCain_official_portrait_2009.jpg",
     "createdAt": "2021-06-03T22:09:47.979Z",
     "updatedAt": "2021-06-03T22:09:47.979Z"
   },
@@ -33,11 +35,12 @@
     "firstName": "Ta-Nehisi",
     "middleName": "",
     "lastName": "Coates",
-    "born": null,
+    "born": "1975-09-30T00:00:00.000Z",
     "died": null,
-    "profession": "",
+    "profession": "Essayist, Journalist, Writer",
     "bio": "",
-    "reference": "",
+    "reference": "https://www.britannica.com/biography/Ta-Nehisi-Coates",
+    "imageURL": "https://cdn.britannica.com/85/193585-050-86F75A6B/Ta-Nehisi-Coates.jpg",
     "createdAt": "2021-06-03T22:09:48.019Z",
     "updatedAt": "2021-06-03T22:09:48.019Z"
   },
@@ -49,9 +52,10 @@
     "lastName": "Fournier",
     "born": null,
     "died": null,
-    "profession": "",
+    "profession": "President of Truscott Rossman",
     "bio": "",
-    "reference": "",
+    "reference": "https://www.penguinrandomhouse.com/authors/188191/ron-fournier",
+    "imageURL": "https://images1.penguinrandomhouse.com/author/188191",
     "createdAt": "2021-06-03T22:09:48.063Z",
     "updatedAt": "2021-06-03T22:09:48.063Z"
   },
@@ -63,9 +67,10 @@
     "lastName": "Carey",
     "born": null,
     "died": null,
-    "profession": "",
+    "profession": "Actor, Comedian",
     "bio": "",
-    "reference": "",
+    "reference": "https://www.imdb.com/name/nm0004804/",
+    "imageURL": "https://m.media-amazon.com/images/M/MV5BMTQ1MzI2MDU1OV5BMl5BanBnXkFtZTcwMzMyMTA3Mw@@._V1_UY317_CR8,0,214,317_AL_.jpg",
     "createdAt": "2021-06-03T22:09:48.102Z",
     "updatedAt": "2021-06-03T22:09:48.102Z"
   },
@@ -77,9 +82,10 @@
     "lastName": "Obama",
     "born": null,
     "died": null,
-    "profession": "",
+    "profession": "President of the United States",
     "bio": "",
-    "reference": "",
+    "reference": "https://www.whitehouse.gov/about-the-white-house/presidents/barack-obama/",
+    "imageURL": "https://www.whitehouse.gov/wp-content/uploads/2021/01/44_barack_obama.jpg",
     "createdAt": "2021-06-03T22:09:48.142Z",
     "updatedAt": "2021-06-03T22:09:48.142Z"
   },
@@ -91,9 +97,10 @@
     "lastName": "Rollins",
     "born": null,
     "died": null,
-    "profession": "",
+    "profession": "Republican Campaign Consultant",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Ed_Rollins",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Portraits_of_Assistants_to_President_Ronald_Reagan_%28cropped%29.jpg",
     "createdAt": "2021-06-03T22:09:48.183Z",
     "updatedAt": "2021-06-03T22:09:48.183Z"
   },
@@ -107,7 +114,8 @@
     "died": null,
     "profession": "",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Julia_Roberts",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Julia_Roberts_2011_Shankbone_3.JPG",
     "createdAt": "2021-06-03T22:09:48.223Z",
     "updatedAt": "2021-06-03T22:09:48.223Z"
   },
@@ -121,7 +129,8 @@
     "died": null,
     "profession": "",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Paul_Ryan",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Paul_Ryan_official_photo.jpg/220px-Paul_Ryan_official_photo.jpg",
     "createdAt": "2021-06-03T22:09:48.272Z",
     "updatedAt": "2021-06-03T22:09:48.272Z"
   },
@@ -133,9 +142,10 @@
     "lastName": "Cox Richardson",
     "born": null,
     "died": null,
-    "profession": "",
+    "profession": "Professor of history at Boston College",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Heather_Cox_Richardson",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Heather_Cox_Richardson_2016.jpg/220px-Heather_Cox_Richardson_2016.jpg",
     "createdAt": "2021-06-03T22:09:48.308Z",
     "updatedAt": "2021-06-03T22:09:48.308Z"
   },
@@ -150,6 +160,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.340Z",
     "updatedAt": "2021-06-03T22:09:48.340Z"
   },
@@ -164,6 +175,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.375Z",
     "updatedAt": "2021-06-03T22:09:48.375Z"
   },
@@ -178,6 +190,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.414Z",
     "updatedAt": "2021-06-03T22:09:48.414Z"
   },
@@ -192,6 +205,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.450Z",
     "updatedAt": "2021-06-03T22:09:48.450Z"
   },
@@ -206,6 +220,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.482Z",
     "updatedAt": "2021-06-03T22:09:48.482Z"
   },
@@ -220,6 +235,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.522Z",
     "updatedAt": "2021-06-03T22:09:48.522Z"
   },
@@ -234,6 +250,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.560Z",
     "updatedAt": "2021-06-03T22:09:48.560Z"
   },
@@ -248,6 +265,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.593Z",
     "updatedAt": "2021-06-03T22:09:48.593Z"
   },
@@ -262,6 +280,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.634Z",
     "updatedAt": "2021-06-03T22:09:48.634Z"
   },
@@ -276,6 +295,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.670Z",
     "updatedAt": "2021-06-03T22:09:48.670Z"
   },
@@ -290,6 +310,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.710Z",
     "updatedAt": "2021-06-03T22:09:48.710Z"
   },
@@ -304,6 +325,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.746Z",
     "updatedAt": "2021-06-03T22:09:48.746Z"
   },
@@ -318,6 +340,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.781Z",
     "updatedAt": "2021-06-03T22:09:48.781Z"
   },
@@ -332,6 +355,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.814Z",
     "updatedAt": "2021-06-03T22:09:48.814Z"
   },
@@ -346,6 +370,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.850Z",
     "updatedAt": "2021-06-03T22:09:48.850Z"
   },
@@ -360,6 +385,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.882Z",
     "updatedAt": "2021-06-03T22:09:48.882Z"
   },
@@ -374,6 +400,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.914Z",
     "updatedAt": "2021-06-03T22:09:48.914Z"
   },
@@ -388,6 +415,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.955Z",
     "updatedAt": "2021-06-03T22:09:48.955Z"
   },
@@ -402,6 +430,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:48.995Z",
     "updatedAt": "2021-06-03T22:09:48.995Z"
   },
@@ -416,6 +445,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.030Z",
     "updatedAt": "2021-06-03T22:09:49.030Z"
   },
@@ -430,6 +460,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.062Z",
     "updatedAt": "2021-06-03T22:09:49.062Z"
   },
@@ -444,6 +475,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.100Z",
     "updatedAt": "2021-06-03T22:09:49.100Z"
   },
@@ -458,6 +490,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.139Z",
     "updatedAt": "2021-06-03T22:09:49.139Z"
   },
@@ -472,6 +505,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.173Z",
     "updatedAt": "2021-06-03T22:09:49.173Z"
   },
@@ -486,6 +520,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.205Z",
     "updatedAt": "2021-06-03T22:09:49.205Z"
   },
@@ -500,6 +535,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.239Z",
     "updatedAt": "2021-06-03T22:09:49.239Z"
   },
@@ -514,6 +550,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.279Z",
     "updatedAt": "2021-06-03T22:09:49.279Z"
   },
@@ -528,6 +565,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.314Z",
     "updatedAt": "2021-06-03T22:09:49.314Z"
   },
@@ -542,6 +580,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.347Z",
     "updatedAt": "2021-06-03T22:09:49.347Z"
   },
@@ -556,6 +595,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.384Z",
     "updatedAt": "2021-06-03T22:09:49.384Z"
   },
@@ -570,6 +610,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.421Z",
     "updatedAt": "2021-06-03T22:09:49.421Z"
   },
@@ -584,6 +625,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.453Z",
     "updatedAt": "2021-06-03T22:09:49.453Z"
   },
@@ -598,6 +640,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.486Z",
     "updatedAt": "2021-06-03T22:09:49.486Z"
   },
@@ -612,6 +655,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.522Z",
     "updatedAt": "2021-06-03T22:09:49.522Z"
   },
@@ -626,6 +670,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.559Z",
     "updatedAt": "2021-06-03T22:09:49.559Z"
   },
@@ -640,6 +685,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.593Z",
     "updatedAt": "2021-06-03T22:09:49.593Z"
   },
@@ -653,7 +699,8 @@
     "died": null,
     "profession": "",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Ulysses_S._Grant",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Ulysses_S._Grant_1870-1880.jpg/220px-Ulysses_S._Grant_1870-1880.jpg",
     "createdAt": "2021-06-03T22:09:49.625Z",
     "updatedAt": "2021-06-03T22:09:49.625Z"
   },
@@ -667,7 +714,8 @@
     "died": null,
     "profession": "",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Sun_Tzu",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Enchoen27n3200.jpg/220px-Enchoen27n3200.jpg",
     "createdAt": "2021-06-03T22:09:49.659Z",
     "updatedAt": "2021-06-03T22:09:49.659Z"
   },
@@ -681,7 +729,8 @@
     "died": null,
     "profession": "",
     "bio": "",
-    "reference": "",
+    "reference": "https://en.wikipedia.org/wiki/Plutarch",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Plutarch_of_Chaeronea-03-removebg-preview.png/250px-Plutarch_of_Chaeronea-03-removebg-preview.png",
     "createdAt": "2021-06-03T22:09:49.698Z",
     "updatedAt": "2021-06-03T22:09:49.698Z"
   },
@@ -696,6 +745,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.741Z",
     "updatedAt": "2021-06-03T22:09:49.741Z"
   },
@@ -710,6 +760,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.781Z",
     "updatedAt": "2021-06-03T22:09:49.781Z"
   },
@@ -724,6 +775,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.814Z",
     "updatedAt": "2021-06-03T22:09:49.814Z"
   },
@@ -738,6 +790,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.850Z",
     "updatedAt": "2021-06-03T22:09:49.850Z"
   },
@@ -752,6 +805,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.893Z",
     "updatedAt": "2021-06-03T22:09:49.893Z"
   },
@@ -766,6 +820,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.933Z",
     "updatedAt": "2021-06-03T22:09:49.933Z"
   },
@@ -780,6 +835,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:49.971Z",
     "updatedAt": "2021-06-03T22:09:49.971Z"
   },
@@ -794,6 +850,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:50.008Z",
     "updatedAt": "2021-06-03T22:09:50.008Z"
   },
@@ -808,6 +865,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:50.039Z",
     "updatedAt": "2021-06-03T22:09:50.039Z"
   },
@@ -822,6 +880,7 @@
     "profession": "",
     "bio": "",
     "reference": "",
+    "imageURL": "",
     "createdAt": "2021-06-03T22:09:50.071Z",
     "updatedAt": "2021-06-03T22:09:50.071Z"
   }

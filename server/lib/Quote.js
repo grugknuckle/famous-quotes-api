@@ -9,8 +9,9 @@ class Quote {
       citation: this.citation,
       source: this.source,
       tags: this.tags,
-      likes: this.likes,
-      dislikes: this.dislikes,
+      // likes: this.likes,
+      // dislikes: this.dislikes,
+      rating: this.rating,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       revision: this._v
@@ -104,9 +105,19 @@ class Quote {
           items: { type: 'string' },
           example: ['courage', 'cowardice']
         },
-        likes: { type: 'integer', description: 'The running count of likes this quote has. Not a scientific measure.', example: 1 },
-        dislikes: { type: 'integer', description: 'The running count of dislikes this quote has. Not a scientific measure.', example: 0 },
-        createdAt: { type: 'string', readOnly: true, description: 'The date and time that this document was added to the database.' },
+        // likes: {
+        //   type: 'integer', description: 'The running count of likes this quote has. Not a scientific measure.',
+        //   example: 1
+        // },
+        // dislikes: {
+        //   type: 'integer', description: 'The running count of dislikes this quote has. Not a scientific measure.',
+        //   example: 0
+        // },
+        rating: {
+          type: 'number', description: 'The rating on a scale of 0 to 5 stars.',
+          example: 2.5
+        },
+        createdAt: {type: 'string', readOnly: true, description: 'The date and time that this document was added to the database.' },
         updatedAt: { type: 'string', readOnly: true, description: 'The data and time that this document was last updated.' },
       }
     }

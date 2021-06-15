@@ -15,9 +15,9 @@ async function killEmAll() {
     await QuoteModel.remove({})
     console.log(`Removed all documents from the Quote collection.`)
 
-    console.log(`preparing to clear the Author collection ...`)
-    await AuthorModel.remove({})
-    console.log(`Removed all documents from the Author collection.`)
+    // console.log(`preparing to clear the Author collection ...`)
+    // await AuthorModel.remove({})
+    // console.log(`Removed all documents from the Author collection.`)
 
   } catch (error) {
     console.log('Something went wrong.')
