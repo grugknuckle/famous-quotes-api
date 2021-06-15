@@ -23,17 +23,17 @@ async function updateAuthors() {
 
   for (let datapoint of dataset) {
     const id = datapoint.id
+    const body = AuthorModel.parseInput(datapoint)
     try {
       
-      const found = AuthorModel.findById(id)
+      const found = await AuthorModel.findById(id)
       if(!found) {
         // add a new one?
         continue
       }
-      
-      const body = AuthorModel.parseInput(datapoint)
-      AuthorModel.updateOne({ _id: id }, body)
+      found.patch(body)
       const updated = await found.save()
+
       console.log(`updated author ${updated.fullName}, id=${updated._id}`)
     } catch (error) {
       console.log(`failed to update document ${id}: ${error}`)
