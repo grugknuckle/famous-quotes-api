@@ -123,8 +123,9 @@ class Controller {
    * @returns 
    */
   validateRequestBody(schema) {
+    const validator = this.validator
     return function (req, res, next) {
-      const validation = this.validator.validate(body, schema)
+      const validation = validator.validate(body, schema)
       if (validation.valid) {
         next()
       } else {
