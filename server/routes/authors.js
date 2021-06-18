@@ -1,17 +1,20 @@
 const router = require('express').Router()
+const { verifyJWT, checkJWTScopes } = require('./../lib/Auth')
+
 const Controller = require('./../lib/Controller')
 const AuthorModel = require('../models/author.model')
 const Service = require('./../lib/Service')
 
 const controller = new Controller('authors')
 const service = new Service(AuthorModel)
+const options = {
+  customScopeKey: 'permissions'
+}
 module.exports = router
 
-// TODO ... add request validation middleware
-// TODO ... add route parameters
-
 router.route('/')
-  .get(async (req, res) => {
+  .all(verifyJWT)
+  .get(checkJWTScopes([ 'read:authors' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -23,7 +26,8 @@ router.route('/')
   })
 
 router.route('/:id')
-  .get(async (req, res) => {
+  .all(verifyJWT)
+  .get(checkJWTScopes([ 'read:authors' ], options), async (req, res) => {
     try {
       const { status, data, message } = await service.findById(req.params.id, req.query)
       const json = controller.formatResponse(req, res, { status, data, message })
@@ -33,7 +37,7 @@ router.route('/:id')
       res.status(json.status).json(json)
     }
   })
-  .delete(async (req, res) => {
+  .delete(checkJWTScopes([ 'delete:authors' ], options),async (req, res) => {
     try {
       const { status, message, data } = await service.remove(req.params.id)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -43,7 +47,12 @@ router.route('/:id')
       res.status(json.status).json(json)
     }
   })
-  .put(async (req, res) => {
+  
+
+router.route('/:id')
+  .all(verifyJWT)
+  .all(controller.validateRequestBody(AuthorModel.jsonSchema()))
+  .put(checkJWTScopes([ 'update:authors' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.update(req.body, req.params.id)     
       const json = controller.formatResponse(req, res, { status, data, message })
@@ -55,7 +64,9 @@ router.route('/:id')
   })
 
 router.route('/add')
-  .post(async (req, res) => {
+  .all(verifyJWT)
+  .all(controller.validateRequestBody(AuthorModel.jsonSchema()))
+  .post(checkJWTScopes([ 'create:authors' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.create(req.body)
       const json = controller.formatResponse(req, res, { status, data, message })

@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const checkJWTScopes = require('express-jwt-authz')         // https://github.com/auth0/express-jwt-authz
+const { verifyJWT, checkJWTScopes } = require('./../lib/Auth')
+
 const Controller = require('./../lib/Controller')
 const QuoteModel = require('../models/quote.model')
 const Service = require('./../lib/Service')
@@ -14,8 +15,8 @@ module.exports = router
 // TODO ... add request validation middleware (e.g. request body validation)
 
 router.route('/')
-  .all(checkJWTScopes([ 'read:quotes' ], options))
-  .get(async (req, res) => {
+  .all(verifyJWT)
+  .get(checkJWTScopes([ 'read:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -27,19 +28,10 @@ router.route('/')
   })
 
 router.route('/:id')
+  .all(verifyJWT)
   .get(checkJWTScopes([ 'read:quotes' ], options), async (req, res) => {
     try {
       const { status, data, message } = await service.findById(req.params.id, req.query)
-      const json = controller.formatResponse(req, res, { status, data, message })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
-    }
-  })
-  .put(checkJWTScopes([ 'update:quotes' ], options), async (req, res) => {
-    try {
-      const { status, message, data } = await service.update(req.body, req.params.id)     
       const json = controller.formatResponse(req, res, { status, data, message })
       res.status(status).json(json)
     } catch (error) {
@@ -58,8 +50,23 @@ router.route('/:id')
     }
   })
   
-
+router.route('/:id')
+  .all(verifyJWT)
+  .all(controller.validateRequestBody(QuoteModel.jsonSchema()))
+  .put(checkJWTScopes([ 'update:quotes' ], options), async (req, res) => {
+    try {
+      const { status, message, data } = await service.update(req.body, req.params.id)     
+      const json = controller.formatResponse(req, res, { status, data, message })
+      res.status(status).json(json)
+    } catch (error) {
+      const json = controller.errorHandler(req, res, error)
+      res.status(json.status).json(json)
+    }
+  })
+  
 router.route('/add')
+  .all(verifyJWT)
+  .all(controller.validateRequestBody(QuoteModel.jsonSchema()))
   .post(checkJWTScopes([ 'create:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.create(req.body)
