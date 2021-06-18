@@ -122,8 +122,15 @@ class Controller {
    * @param {*} schema 
    * @returns 
    */
-  validateRequestBody(body, schema) {
-    return this.validator.validate(body, schema)
+  validateRequestBody(schema) {
+    return function (req, res, next) {
+      const validation = this.validator.validate(body, schema)
+      if (validation.valid) {
+        next()
+      } else {
+        res.status(400).json(validation)
+      }
+    }
   }
 }
 
