@@ -133,7 +133,7 @@ class Controller {
         const message = 'Request body does not match schema'
         const data = validation
         const json = self.formatResponse(req, res, { status, message, data })
-        res.status(status).json(validation)
+        res.status(status).json(json)
       }
     }
   }
