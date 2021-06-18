@@ -8,7 +8,8 @@ const Service = require('./../lib/Service')
 const controller = new Controller('authors')
 const service = new Service(AuthorModel)
 const options = {
-  customScopeKey: 'permissions'
+  customScopeKey: 'permissions',
+  failWithError: true
 }
 module.exports = router
 

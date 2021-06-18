@@ -16,7 +16,7 @@ async function requestAccessToken() {
       grant_type: 'client_credentials',
       client_id: process.env.AUTH0_API_ID,
       client_secret: process.env.AUTH0_API_SECRET,
-      audience: 'https://api-quotations.herokuapp.com',
+      audience: process.env.AUTH0_AUDIENCE,
     })
   }
   return await axios(options)

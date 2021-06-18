@@ -8,7 +8,8 @@ const Service = require('./../lib/Service')
 const controller = new Controller('quotations')
 const service = new Service(QuoteModel)
 const options = {
-  customScopeKey: 'permissions'
+  customScopeKey: 'permissions',
+  failWithError: true
 }
 module.exports = router
 
