@@ -123,13 +123,17 @@ class Controller {
    * @returns 
    */
   validateRequestBody(schema) {
-    const validator = this.validator
+    const self = this
     return function (req, res, next) {
-      const validation = validator.validate(body, schema)
+      const validation = self.validator.validate(req.body, schema)
       if (validation.valid) {
         next()
       } else {
-        res.status(400).json(validation)
+        const status = 400
+        const message = 'Request body does not match schema'
+        const data = validation
+        const json = self.formatResponse(req, res, { status, message, data })
+        res.status(status).json(validation)
       }
     }
   }
