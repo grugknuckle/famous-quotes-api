@@ -1,6 +1,11 @@
 class Quote {
   constructor() {}
 
+  /**
+   * Formats the mongoose model as JSON for response to a request.
+   * 
+   * @returns {Object}
+   */
   format() {
     const formatted = {
       id: this._id,
@@ -19,6 +24,11 @@ class Quote {
     return formatted
   }
 
+  /**
+   * Updates the mongoose model propertied with relevant values passed to the function.
+   * 
+   * @param {Object} body 
+   */
   patch(body) {
     this.text = body.text ?? found.text
     this.author = body.author ?? found.author
@@ -30,6 +40,12 @@ class Quote {
     this.increment()
   }
 
+  /**
+   * Parses a url query into a mongoose-paginate-v2 query.
+   * 
+   * @param {Object} query A javascript object representing the url query 
+   * @returns {Object}
+   */
   static parseQuery(query) {
     let filter = {}
     if (query.text) {
@@ -60,6 +76,12 @@ class Quote {
     return { filter, options }
   }
 
+  /**
+   * Used to extract quotation information from a request body.
+   * 
+   * @param {*} body 
+   * @returns {Object}
+   */
   static parseInput(body) {
     const data = {
       text: body.text,
@@ -73,6 +95,12 @@ class Quote {
     return data
   }
 
+  /**
+   * The JSON Schema for the Quotation collection. This schema is used to generate the API specification AND to 
+   * validate incoming request bodies.
+   *  
+   * @returns {Object}
+   */
   static jsonSchema() {
     return {
       type: 'object',
