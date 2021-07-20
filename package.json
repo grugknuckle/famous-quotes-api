@@ -21,6 +21,7 @@
     "url": "https://github.com/grugknuckle/famous-quotes-api.git"
   },
   "dependencies": {
+    "auth0": "^2.35.1",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
