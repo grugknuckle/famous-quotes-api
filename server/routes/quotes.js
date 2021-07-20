@@ -15,7 +15,7 @@ module.exports = router
 
 router.route('/')
   .all(verifyJWT)
-  .get(checkJWTScopes([ 'read:quotes' ], options), async (req, res) => {
+  .get(checkJWTScopes([ 'read:quotes' ], { failWithError: true }), async (req, res) => {
     try {
       const { status, message, data } = await service.search(req.query)
       const json = controller.formatResponse(req, res, { status, message, data })
@@ -28,7 +28,7 @@ router.route('/')
 
 router.route('/:id')
   .all(verifyJWT)
-  .get(checkJWTScopes([ 'read:quotes' ], options), async (req, res) => {
+  .get(checkJWTScopes([ 'read:quotes' ], { failWithError: true }), async (req, res) => {
     try {
       const { status, data, message } = await service.findById(req.params.id, req.query)
       const json = controller.formatResponse(req, res, { status, data, message })
