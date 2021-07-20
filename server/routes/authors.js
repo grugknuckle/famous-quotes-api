@@ -2,11 +2,9 @@ const router = require('express').Router()
 const { verifyJWT, checkJWTScopes } = require('./../lib/Auth')
 
 const Controller = require('./../lib/Controller')
-const AuthorModel = require('../models/author.model')
-const Service = require('./../lib/Service')
+const service = require('./../services/AuthorService')
+const controller = new Controller('quotations')
 
-const controller = new Controller('authors')
-const service = new Service(AuthorModel)
 const options = {
   customScopeKey: 'permissions',
   failWithError: true
@@ -52,7 +50,7 @@ router.route('/:id')
 
 router.route('/:id')
   .all(verifyJWT)
-  .all(controller.validateRequestBody(AuthorModel.jsonSchema()))
+  .all(controller.validateRequestBody(service.jsonSchema))
   .put(checkJWTScopes([ 'update:authors' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.update(req.body, req.params.id)     
@@ -66,7 +64,7 @@ router.route('/:id')
 
 router.route('/add')
   .all(verifyJWT)
-  .all(controller.validateRequestBody(AuthorModel.jsonSchema()))
+  .all(controller.validateRequestBody(service.jsonSchema))
   .post(checkJWTScopes([ 'create:authors' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.create(req.body)

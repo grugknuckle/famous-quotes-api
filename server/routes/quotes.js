@@ -2,11 +2,9 @@ const router = require('express').Router()
 const { verifyJWT, checkJWTScopes } = require('./../lib/Auth')
 
 const Controller = require('./../lib/Controller')
-const QuoteModel = require('../models/quote.model')
-const Service = require('./../lib/Service')
-
+const service = require('./../services/QuoteService')
 const controller = new Controller('quotations')
-const service = new Service(QuoteModel)
+
 const options = {
   customScopeKey: 'permissions',
   failWithError: true
@@ -53,10 +51,10 @@ router.route('/:id')
   
 router.route('/:id')
   .all(verifyJWT)
-  .all(controller.validateRequestBody(QuoteModel.jsonSchema()))
+  .all(controller.validateRequestBody(service.jsonSchema))
   .put(checkJWTScopes([ 'update:quotes' ], options), async (req, res) => {
     try {
-      const { status, message, data } = await service.update(req.body, req.params.id)     
+      const { status, message, data } = await service.update(req.body, req.params.id)
       const json = controller.formatResponse(req, res, { status, data, message })
       res.status(status).json(json)
     } catch (error) {
@@ -67,7 +65,7 @@ router.route('/:id')
   
 router.route('/add')
   .all(verifyJWT)
-  .all(controller.validateRequestBody(QuoteModel.jsonSchema()))
+  .all(controller.validateRequestBody(service.jsonSchema))
   .post(checkJWTScopes([ 'create:quotes' ], options), async (req, res) => {
     try {
       const { status, message, data } = await service.create(req.body)
