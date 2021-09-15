@@ -12,6 +12,7 @@
     "build-spec": "node ./server/scripts/build-spec.js",
     "test": "jest --runInBand --detectOpenHandles --unhandled-rejections=strict --forceExit",
     "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
+    "create-quote": "node ./server/scripts/create-quote.js",
     "load-db": "node ./server/scripts/load-db.js",
     "clear-db": "node ./server/scripts/clear-db.js",
     "update-db": "node ./server/scripts/update-db.js"

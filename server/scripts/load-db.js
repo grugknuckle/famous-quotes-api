@@ -6,19 +6,21 @@ const AuthorModel = require('../models/author.model')
 
 main()
 
+const authors = require(`./../backup/authors.json`)
+const quotes = require(`./../backup/quotes.json`)
+
 async function main() {
   const database = new Database(process.env.DB_CONNECTION_STRING)
   await database.connect()
 
-  // await loadAuthors()
-  await loadQuotes()
+  await loadAuthors(authors)
+  await loadQuotes(quotes)
 
   await database.disconnect()
   console.log('DONE !')
 }
 
-async function loadAuthors() {
-  const dataset = require(`./../backup/authors.json`)
+async function loadAuthors(dataset) {
   console.log(`preparing to load ${dataset.length} ${AuthorModel.name} documents from the authors.json dataset ...`)
 
   for (let datapoint of dataset) {
@@ -33,9 +35,7 @@ async function loadAuthors() {
   }
 }
 
-
-async function loadQuotes() {
-  const dataset = require(`./../backup/quotes.json`)
+async function loadQuotes(dataset) {
   console.log(`preparing to load ${dataset.length} ${QuoteModel.name} documents from the quotes.json dataset ...`)
 
   for (let datapoint of dataset) {
