@@ -5,7 +5,7 @@ const Author = require('./../lib/Author')
 //https://mongoosejs.com/docs/schematypes.html#schematype-options
 
 const structure = {
-  fullName: { type: String, required: true, trim: true, index: true },
+  fullName: { type: String, required: true, trim: true, unique: true, index: true },
   firstName: { type: String, required: false, trim: true },
   middleName: { type: String, required: false, trim: true },
   lastName: { type: String, required: false, trim: true },
