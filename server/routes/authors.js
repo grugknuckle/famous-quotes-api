@@ -12,40 +12,49 @@ const options = {
 module.exports = router
 
 router.route('/')
-  .all(verifyJWT)
-  .get(checkJWTScopes([ 'read:authors' ], { failWithError: true }), async (req, res) => {
-    try {
-      const { status, message, data } = await service.search(req.query)
-      const json = controller.formatResponse(req, res, { status, message, data })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
+  // .all(verifyJWT)
+  .get(
+    // checkJWTScopes([ 'read:authors' ], { failWithError: true }),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.search(req.query)
+        const json = controller.formatResponse(req, res, { status, message, data })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
     }
-  })
+  )
 
 router.route('/:id')
-  .all(verifyJWT)
-  .get(checkJWTScopes([ 'read:authors' ], { failWithError: true }), async (req, res) => {
-    try {
-      const { status, data, message } = await service.findById(req.params.id, req.query)
-      const json = controller.formatResponse(req, res, { status, data, message })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
+  // .all(verifyJWT)
+  .get(
+    // checkJWTScopes([ 'read:authors' ], { failWithError: true }),
+    async (req, res) => {
+      try {
+        const { status, data, message } = await service.findById(req.params.id, req.query)
+        const json = controller.formatResponse(req, res, { status, data, message })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
     }
-  })
-  .delete(checkJWTScopes([ 'delete:authors' ], options), async (req, res) => {
-    try {
-      const { status, message, data } = await service.remove(req.params.id)
-      const json = controller.formatResponse(req, res, { status, message, data })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
+  )
+  .delete(
+    // checkJWTScopes([ 'delete:authors' ], options),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.remove(req.params.id)
+        const json = controller.formatResponse(req, res, { status, message, data })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
     }
-  })
+  )
   
 
 router.route('/:id')
