@@ -4,7 +4,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const serveStatic = require('serve-static')
 
-const { oidcMiddleware } = require('./lib/Auth')
+const { oidcMiddleware, enforceHTTPS } = require('./lib/Auth')
 const { routerLogger, errorLogger } = require('./lib/Logger')     // for logging / monitoring
 
 const app = express()
@@ -16,6 +16,10 @@ app.use(cors())         // TODO: decide if you want a whitelist or just have a g
 app.use(helmet({        // https://www.npmjs.com/package/helmet
   contentSecurityPolicy: false
 }))
+
+if(process.env.MODE === 'production') {
+  app.use(enforceHTTPS) // force TLS for auth0 - in production only (so I don't have deal with SSL certs in dev)
+}
 
 // Auth0 middleware for OIDC ... (for protecting admin views)
 app.use(oidcMiddleware)
