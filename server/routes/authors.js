@@ -12,9 +12,9 @@ const options = {
 module.exports = router
 
 router.route('/')
-  // .all(verifyJWT)
+  .all(verifyJWT)
   .get(
-    // checkJWTScopes([ 'read:authors' ], { failWithError: true }),
+    checkJWTScopes([ 'read:authors' ], options),
     async (req, res) => {
       try {
         const { status, message, data } = await service.search(req.query)
@@ -28,9 +28,9 @@ router.route('/')
   )
 
 router.route('/:id')
-  // .all(verifyJWT)
+  .all(verifyJWT)
   .get(
-    // checkJWTScopes([ 'read:authors' ], { failWithError: true }),
+    checkJWTScopes([ 'read:authors' ], options),
     async (req, res) => {
       try {
         const { status, data, message } = await service.findById(req.params.id, req.query)
@@ -43,7 +43,7 @@ router.route('/:id')
     }
   )
   .delete(
-    // checkJWTScopes([ 'delete:authors' ], options),
+    checkJWTScopes([ 'delete:authors' ], options),
     async (req, res) => {
       try {
         const { status, message, data } = await service.remove(req.params.id)
@@ -60,27 +60,33 @@ router.route('/:id')
 router.route('/:id')
   .all(verifyJWT)
   .all(controller.validateRequestBody(service.jsonSchema))
-  .put(checkJWTScopes([ 'update:authors' ], options), async (req, res) => {
-    try {
-      const { status, message, data } = await service.update(req.body, req.params.id)     
-      const json = controller.formatResponse(req, res, { status, data, message })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
+  .put(
+    checkJWTScopes([ 'update:authors' ], options),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.update(req.body, req.params.id)     
+        const json = controller.formatResponse(req, res, { status, data, message })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
     }
-  })
+  )
 
 router.route('/add')
   .all(verifyJWT)
   .all(controller.validateRequestBody(service.jsonSchema))
-  .post(checkJWTScopes([ 'create:authors' ], options), async (req, res) => {
-    try {
-      const { status, message, data } = await service.create(req.body)
-      const json = controller.formatResponse(req, res, { status, data, message })
-      res.status(status).json(json)
-    } catch (error) {
-      const json = controller.errorHandler(req, res, error)
-      res.status(json.status).json(json)
+  .post(
+    checkJWTScopes([ 'create:authors' ], options),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.create(req.body)
+        const json = controller.formatResponse(req, res, { status, data, message })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
     }
-  })
+  )

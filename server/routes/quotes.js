@@ -14,9 +14,9 @@ module.exports = router
 // TODO ... add request validation middleware (e.g. request body validation)
 
 router.route('/')
-  // .all(verifyJWT)
+  .all(verifyJWT)
   .get(
-    // checkJWTScopes([ 'read:quotes' ], { failWithError: true }), 
+    checkJWTScopes([ 'read:quotes' ], options), 
     async (req, res) => {
       try {
         const { status, message, data } = await service.search(req.query)
@@ -30,9 +30,9 @@ router.route('/')
   )
 
 router.route('/:id')
-  // .all(verifyJWT)
+  .all(verifyJWT)
   .get(
-    // checkJWTScopes([ 'read:quotes' ], { failWithError: true }),
+    checkJWTScopes([ 'read:quotes' ], options),
     async (req, res) => {
       try {
         const { status, data, message } = await service.findById(req.params.id, req.query)
