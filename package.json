@@ -14,8 +14,8 @@
     "database": "docker run --rm -d -p 27017:27017 --name=\"local-mongodb\" mongo",
     "create-quote": "node ./server/scripts/create-quote.js",
     "load-db": "node ./server/scripts/load-db.js",
-    "clear-db": "node ./server/scripts/clear-db.js",
-    "update-db": "node ./server/scripts/update-db.js"
+    "tfidf-index": "node ./server/scripts/tfidf-indexer.js",
+    "search-quotes": "node ./server/scripts/search-quotes.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "natural": "^5.1.1",
     "nodemon": "^2.0.7",
     "serve-static": "^1.14.1",
+    "stopword": "^1.0.11",
     "winston": "^3.3.3"
   },
   "engines": {
