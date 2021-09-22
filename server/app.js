@@ -17,8 +17,9 @@ app.use(helmet({        // https://www.npmjs.com/package/helmet
   contentSecurityPolicy: false
 }))
 
+// force TLS for auth0 - in production only (so I don't have deal with SSL certs in dev)
 if(process.env.MODE === 'production') {
-  app.use(enforceHTTPS) // force TLS for auth0 - in production only (so I don't have deal with SSL certs in dev)
+  app.use(enforceHTTPS)
 }
 
 // Auth0 middleware for OIDC ... (for protecting admin views)
