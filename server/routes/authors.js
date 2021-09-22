@@ -11,6 +11,8 @@ const options = {
 }
 module.exports = router
 
+// TODO ... add request validation middleware (e.g. request body validation)
+
 router.route('/')
   .all(verifyJWT)
   .get(
