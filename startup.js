@@ -13,7 +13,7 @@ switch(mode) {
     require('dotenv').config({ path: path.join(__dirname, './.env.local') })
     break
   default:
-    // require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
+    require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
 }
 
 const { logger } = require('./server/lib/Logger')
@@ -37,8 +37,6 @@ async function startup(app) {
     logger.warn('An error occurred while connecting to database.')
     logger.error(error)
   }
-  
-  
   
   // gracefully handle shutdown
   process.on('SIGTERM', async () => { await shutdown(database) })
