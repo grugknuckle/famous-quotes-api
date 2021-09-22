@@ -12,8 +12,6 @@ class Database {
     // TODO: Error handling on bad inputs to constructor.
     this._uri = uri
     this._connection = null
-    // suppress deprecation warning ... see https://github.com/Automattic/mongoose/issues/7108
-    mongoose.set('useFindAndModify', false)
   }
 
   get name() { return this.uri.split('/').pop() }
@@ -26,7 +24,7 @@ class Database {
   async connect() {
     try {
       logger.info(`Connecting to database: ${this.name} ...`)
-      await mongoose.connect(this.uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+      await mongoose.connect(this.uri, {})
       const connection = mongoose.connection
 
       connection.once('connected', () => {
