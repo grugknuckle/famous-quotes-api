@@ -1,12 +1,11 @@
 class Quote {
-  constructor() {}
+  constructor () {}
 
   /**
    * Formats the mongoose model as JSON for response to a request.
-   * 
    * @returns {Object}
    */
-  format() {
+  format () {
     const formatted = {
       id: this._id,
       text: this.text,
@@ -26,28 +25,26 @@ class Quote {
 
   /**
    * Updates the mongoose model propertied with relevant values passed to the function.
-   * 
-   * @param {Object} body 
+   * @param {Object} body The quote data to be updated.
    */
-  patch(body) {
-    this.text = body.text ?? found.text
-    this.author = body.author ?? found.author
-    this.citation = body.citation ?? found.citation
-    this.source = body.source ?? found.source
-    this.tags = body.tags ?? found.tags
-    this.likes = body.likes ?? found.likes
-    this.dislikes = body.dislikes ?? found.dislikes
+  patch (body) {
+    this.text = body.text ?? this.text
+    this.author = body.author ?? this.author
+    this.citation = body.citation ?? this.citation
+    this.source = body.source ?? this.source
+    this.tags = body.tags ?? this.tags
+    this.likes = body.likes ?? this.likes
+    this.dislikes = body.dislikes ?? this.dislikes
     this.increment()
   }
 
   /**
    * Parses a url query into a mongoose-paginate-v2 query.
-   * 
-   * @param {Object} query A javascript object representing the url query 
+   * @param {Object} query A javascript object representing the url query
    * @returns {Object}
    */
-  static parseQuery(query) {
-    let filter = {}
+  static parseQuery (query) {
+    const filter = {}
     if (query.text) {
       filter.text = { $regex: `${query.text}`, $options: 'i' }
     }
@@ -66,11 +63,10 @@ class Quote {
       populate: '',
       sort: query.sort ?? 'author text'
     }
-    
-    if (query.populate && (query.populate.toUpperCase() == 'T')) {
+    if (query.populate && (query.populate.toUpperCase() === 'T')) {
       // should populate all populate-able fields
       options.populate = 'author'
-    } else if (query.populate && 'author' == query.populate.toLowerCase()) {
+    } else if (query.populate && query.populate.toLowerCase() === 'author') {
       options.populate = 'author'
     }
     return { filter, options }
@@ -78,11 +74,10 @@ class Quote {
 
   /**
    * Used to extract quotation information from a request body.
-   * 
-   * @param {*} body 
+   * @param {*} body The body of an http request containing quote data.
    * @returns {Object}
    */
-  static parseInput(body) {
+  static parseInput (body) {
     const data = {
       text: body.text,
       author: body.author,
@@ -96,12 +91,11 @@ class Quote {
   }
 
   /**
-   * The JSON Schema for the Quotation collection. This schema is used to generate the API specification AND to 
-   * validate incoming request bodies.
-   *  
+   * The JSON Schema for the Quotation collection. This schema is used to generate the API
+   * specification AND to validate incoming request bodies.
    * @returns {Object}
    */
-  static jsonSchema() {
+  static jsonSchema () {
     return {
       type: 'object',
       description: 'A Quote document',
@@ -116,7 +110,7 @@ class Quote {
         author: {
           type: ['string', 'object'],
           description: 'Either the unique identifier for an existing Author document, or an object representing that Author.',
-          example: '60b9532dc5faa768fc3b9c31',
+          example: '60b9532dc5faa768fc3b9c31'
         },
         citation: {
           type: 'string',
@@ -143,11 +137,12 @@ class Quote {
         //   example: 0
         // },
         rating: {
-          type: 'number', description: 'The rating on a scale of 0 to 5 stars.',
+          type: 'number',
+          description: 'The rating on a scale of 0 to 5 stars.',
           example: 2.5
         },
-        createdAt: {type: 'string', readOnly: true, description: 'The date and time that this document was added to the database.' },
-        updatedAt: { type: 'string', readOnly: true, description: 'The data and time that this document was last updated.' },
+        createdAt: { type: 'string', readOnly: true, description: 'The date and time that this document was added to the database.' },
+        updatedAt: { type: 'string', readOnly: true, description: 'The data and time that this document was last updated.' }
       }
     }
   }
