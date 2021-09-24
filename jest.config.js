@@ -1,7 +1,6 @@
 // jest.config.js
 const path = require('path')
 
-
 // Testing Mongoose with Jest ... https://mongoosejs.com/docs/jest.html
 module.exports = {
   testEnvironment: 'node',
@@ -12,7 +11,7 @@ module.exports = {
     'src'
   ],
   modulePaths: [
-    '<rootDir>',
+    '<rootDir>'
     // '<rootDir>/node_modules',
   ],
   notify: false,
@@ -20,6 +19,6 @@ module.exports = {
     '<rootDir>',
     path.join(__dirname, 'tests')
   ],
-  setupFiles: [ './tests/environment.js' ],
+  setupFiles: ['./tests/environment.js']
   // testURL: 'http://localhost:5000',
 }
