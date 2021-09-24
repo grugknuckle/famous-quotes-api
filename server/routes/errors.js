@@ -26,12 +26,5 @@ router
   .route('/*')
   .get((req, res) => {
     // render 404 error as html.
-    res.status(404).send(`<h1>Not Found</h1>`)
-  })
-
-router
-  .route('/')
-  .all((req, res) => {
-    const json = controller.errorHandler(req, res, error)
-    res.status(json.status).json(json)
+    res.status(404).send('<h1>Not Found</h1>')
   })

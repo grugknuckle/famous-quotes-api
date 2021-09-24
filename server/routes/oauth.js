@@ -40,14 +40,14 @@ router.route('/token')
       const response = {
         method: req.method.toUpperCase(),
         resource: req.baseUrl,
-        success: status.success,
+        success: false,
         status: 401,
-        statusText: status.text,
+        statusText: 'UNAUTHORIZED',
         message: error.message,
         data: {
           stack: error.stack
         }
       }
-      res.status(response.status).json(json)
+      res.status(response.status).json(response)
     }
   })

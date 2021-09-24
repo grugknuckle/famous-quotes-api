@@ -16,7 +16,7 @@ module.exports = router
 router.route('/')
   .all(verifyJWT)
   .get(
-    checkJWTScopes([ 'read:quotes' ], options),
+    checkJWTScopes(['read:quotes'], options),
     async (req, res) => {
       try {
         const { status, message, data } = await service.search(req.query)
@@ -32,7 +32,7 @@ router.route('/')
 router.route('/:id')
   .all(verifyJWT)
   .get(
-    checkJWTScopes([ 'read:quotes' ], options),
+    checkJWTScopes(['read:quotes'], options),
     async (req, res) => {
       try {
         const { status, data, message } = await service.findById(req.params.id, req.query)
@@ -45,7 +45,7 @@ router.route('/:id')
     }
   )
   .delete(
-    checkJWTScopes([ 'delete:quotes' ], options),
+    checkJWTScopes(['delete:quotes'], options),
     async (req, res) => {
       try {
         const { status, message, data } = await service.remove(req.params.id)
@@ -57,12 +57,12 @@ router.route('/:id')
       }
     }
   )
-  
+
 router.route('/:id')
   .all(verifyJWT)
   .all(controller.validateRequestBody(service.jsonSchema))
   .put(
-    checkJWTScopes([ 'update:quotes' ], options),
+    checkJWTScopes(['update:quotes'], options),
     async (req, res) => {
       try {
         const { status, message, data } = await service.update(req.body, req.params.id)
@@ -74,13 +74,13 @@ router.route('/:id')
       }
     }
   )
-  
+
 router.route('/add')
   .all(verifyJWT)
   .all(controller.validateRequestBody(service.jsonSchema))
   .post(
-    checkJWTScopes([ 'create:quotes' ], options),
-      async (req, res) => {
+    checkJWTScopes(['create:quotes'], options),
+    async (req, res) => {
       try {
         const { status, message, data } = await service.create(req.body)
         const json = controller.formatResponse(req, res, { status, data, message })

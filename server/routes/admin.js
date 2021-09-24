@@ -2,8 +2,6 @@ const router = require('express').Router()
 const Controller = require('./../lib/Controller')
 const controller = new Controller('home')
 
-const path = require('path')
-
 module.exports = router
 
 router
