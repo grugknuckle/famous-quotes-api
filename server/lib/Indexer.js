@@ -1,4 +1,3 @@
-const jsonfile = require('jsonfile')
 const natural = require('natural')
 const sw = require('stopword')
 
@@ -152,14 +151,6 @@ class Indexer {
     return stems
   }
 
-  /**
-   * Save the document corpus and the Tf-Idf index to JSON.
-   * @param {string} filename The filename and path to save the JSON to.
-   */
-  saveToFile (filename) {
-    const data = { corpus: this.corpus, tfidf: this.tfidf }
-    return jsonfile.writeFile(filename, data, { spaces: 2 })
-  }
 
   /**
    * Rank the documents in the corpus by Tf-Idf against the passed string parameter.

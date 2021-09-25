@@ -17,8 +17,10 @@ async function main() {
     // console.log(quotes)
     const indexer = new Indexer({ corpus: quotes.docs, stemmer: 'lancaster' })
     const filename = path.join(__dirname, './../backup/TfIdf.json')
-    const response = await indexer.saveToFile(filename)
    
+    const data = { corpus: indexer.corpus, tfidf: indexer.tfidf }
+    const response = await jsonfile.writeFile(filename, data, { spaces: 2 })
+
     console.log('DONE !')
   } catch (error) {
     console.error(error)
