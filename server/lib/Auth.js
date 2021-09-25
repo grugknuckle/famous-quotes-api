@@ -1,5 +1,5 @@
-const { auth, requiresAuth } = require('express-openid-connect')  // for protecting admin views
-const checkJWTScopes = require('express-jwt-authz')         // https://github.com/auth0/express-jwt-authz
+const { auth, requiresAuth } = require('express-openid-connect')
+const checkJWTScopes = require('express-jwt-authz')
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')   
 const axios = require('axios');
