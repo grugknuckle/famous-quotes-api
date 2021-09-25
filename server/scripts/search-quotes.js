@@ -1,6 +1,6 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../../.env.prod') })
-const Indexer = require('./../lib/TfIdf')
+const Indexer = require('./../lib/Indexer')
 const Database = require('../lib/Database')
 const QuoteModel = require('../models/quote.model')
 
@@ -15,7 +15,7 @@ async function main () {
     await database.connect()
 
     const quotes = await getAllQuotes()
-    const indexer = new Indexer(quotes.docs)
+    const indexer = new Indexer({ corpus: quotes.docs, stemmer: 'lancaster' })
 
     console.log(`searching for "${searchString}".`)
     console.log(`search string stems: ${indexer.tokenizeAndStem(searchString)}`)
