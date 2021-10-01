@@ -13,7 +13,8 @@ switch(mode) {
     require('dotenv').config({ path: path.join(__dirname, './.env.local') })
     break
   default:
-    require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
+    // read environment vars from heroku settings - not from .env.prod file
+    // require('dotenv').config({ path: path.join(__dirname, './.env.prod') })
 }
 
 const { logger } = require('./server/lib/Logger')
