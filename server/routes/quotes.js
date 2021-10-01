@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { verifyJWT, checkJWTScopes } = require('./../lib/Auth')
 
 const Controller = require('./../lib/Controller')
+const Indexer = require('./../lib/Indexer')
 const service = require('./../services/QuoteService')
 const controller = new Controller('quotations')
 
@@ -12,6 +13,32 @@ const options = {
 module.exports = router
 
 // TODO ... add request validation middleware (e.g. request body validation)
+
+router.route('/index')
+  // .all(verifyJWT)
+  .get(
+    // checkJWTScopes(['read:quotes'], options),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.search(req.query)
+        const indexer = new Indexer({ corpus: data.docs, stemmer: req.query.stemmer ?? 'lancaster' })
+        const output = {
+          status,
+          message,
+          data: {
+            vocabulary: indexer.vocabulary,
+            stems: indexer.stems,
+            documents: indexer.tfidf.documents
+          }
+        }
+        const json = controller.formatResponse(req, res, output)
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
+    }
+  )
 
 router.route('/')
   .all(verifyJWT)

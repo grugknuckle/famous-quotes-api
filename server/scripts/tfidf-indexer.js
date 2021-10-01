@@ -2,7 +2,7 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../../.env.prod') })
 const Database = require('../lib/Database')
 const QuoteModel = require('../models/quote.model')
-const Indexer = require('./../lib/TfIdf')
+const Indexer = require('./../lib/Indexer')
 
 main()
 
@@ -15,9 +15,11 @@ async function main() {
     await database.disconnect()
 
     // console.log(quotes)
-    const indexer = new Indexer(quotes.docs)
+    const indexer = new Indexer({ corpus: quotes.docs, stemmer: 'lancaster' })
     const filename = path.join(__dirname, './../backup/TfIdf.json')
-    const response = await indexer.saveToFile(filename)
+   
+    const data = { corpus: indexer.corpus, tfidf: indexer.tfidf }
+    const response = await jsonfile.writeFile(filename, data, { spaces: 2 })
 
     console.log('DONE !')
   } catch (error) {
@@ -26,13 +28,13 @@ async function main() {
 }
 
 async function getAllQuotes() {
-  const query = {
+  const filter = {}
+  const options = {
     page: 1,
     limit: 250,
     sort: 'author'
   }
 
-  const { filter, options } = QuoteModel.parseQuery(query)
   const found = await QuoteModel.paginate(filter, options)
   found.docs = found.docs.map(document => document.format())
   return found
