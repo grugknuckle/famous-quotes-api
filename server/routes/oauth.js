@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { requiresAuth, requestAccessToken } = require('./../lib/Auth')
+const { requiresAuth } = require('./../lib/Auth')
+const service = require('./../services/oauth')
 
 const Controller = require('./../lib/Controller')
 const controller = new Controller('authentication')
@@ -23,8 +24,13 @@ router.route('/userinfo')
   .get(async (req, res) => {
     try {
       const data = await req.oidc.fetchUserInfo()
-      const json = controller.formatResponse(req, res, { status: 200, message: 'Authenticated user info', data })
-      res.status(200).json(json)
+      const response = {
+        status: 200,
+        message: 'Authenticated user info',
+        data
+      }
+      const json = controller.formatResponse(req, res, response)
+      res.status(response.status).json(json)
     } catch (error) {
       const json = controller.errorHandler(req, res, error)
       res.status(json.status).json(json)
@@ -34,20 +40,17 @@ router.route('/userinfo')
 router.route('/token')
   .get(async (req, res) => {
     try {
-      const data = await requestAccessToken().then(response => response.data)
+      const data = await service.requestAccessToken().then(response => response.data)
       res.status(200).json(data)
     } catch (error) {
       const response = {
-        method: req.method.toUpperCase(),
-        resource: req.baseUrl,
-        success: false,
         status: 401,
-        statusText: 'UNAUTHORIZED',
         message: error.message,
         data: {
           stack: error.stack
         }
       }
-      res.status(response.status).json(response)
+      const json = controller.formatResponse(req, res, response)
+      res.status(response.status).json(json)
     }
   })
