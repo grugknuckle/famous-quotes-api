@@ -12,9 +12,8 @@ class QuoteService {
     return { status: 200, message: `found ${found.totalDocs} documents matching your query`, data: found }
   }
 
-  static async findById (id, query) {
-    const { options } = QuoteModel.parseQuery(query)
-    const found = await QuoteModel.findById(id).populate({ path: options.populate })
+  static async findById (id) {
+    const found = await QuoteModel.findById(id).populate({ path: 'author' })
     const status = found ? 200 : 404
     const message = found ? `Found document with id=${id}` : `Document with id=${id} not found.`
     const data = found ? found.format() : {}
