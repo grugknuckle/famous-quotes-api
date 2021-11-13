@@ -55,6 +55,20 @@ router.route('/')
       }
     }
   )
+  .post(
+    checkJWTScopes(['create:quotes'], options),
+    controller.validateRequestBody(service.jsonSchema),
+    async (req, res) => {
+      try {
+        const { status, message, data } = await service.create(req.body)
+        const json = controller.formatResponse(req, res, { status, data, message })
+        res.status(status).json(json)
+      } catch (error) {
+        const json = controller.errorHandler(req, res, error)
+        res.status(json.status).json(json)
+      }
+    }
+  )
 
 router.route('/:id')
   .all(verifyJWT)
