@@ -123,7 +123,7 @@ class Quote {
           example: 'https://www.brainyquote.com/quotes/plutarch_387443'
         },
         tags: {
-          type: 'string',
+          type: 'array',
           description: 'A list of tags that describe the topic of the quotation.',
           items: { type: 'string' },
           example: ['courage', 'cowardice']

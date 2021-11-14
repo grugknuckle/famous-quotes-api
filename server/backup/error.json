@@ -1,0 +1,117 @@
+{
+  "method": "PUT",
+  "controler": "quotations",
+  "resource": "/api/v1/quotes",
+  "success": false,
+  "status": 400,
+  "statusText": "BAD REQUEST",
+  "message": "Request body does not match schema",
+  "data": {
+    "instance": {
+      "text": "We all remember Abraham Lincoln as the leader who saved our Union. Founder of the Republican Party.",
+      "author": "60b9532cc5faa768fc3b9c06",
+      "citation": "\"Barack Obama Quotes.\" BrainyQuote.com. BrainyMedia Inc, 2021. 27 February 2021.",
+      "source": "https://www.brainyquote.com/quotes/barack_obama_416347",
+      "tags": [
+        ""
+      ],
+      "rating": 2.5
+    },
+    "schema": {
+      "type": "object",
+      "description": "A Quote document",
+      "required": [
+        "text",
+        "author"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique identifier of this document."
+        },
+        "text": {
+          "type": "string",
+          "description": "The acutall text of the document.",
+          "example": "Courage stands halfway between cowardice and rashness, one of which is a lack, the other an excess of courage."
+        },
+        "author": {
+          "type": [
+            "string",
+            "object"
+          ],
+          "description": "Either the unique identifier for an existing Author document, or an object representing that Author.",
+          "example": "60b9532dc5faa768fc3b9c31"
+        },
+        "citation": {
+          "type": "string",
+          "description": "The original reference to where this quotation was found?",
+          "example": "'Plutarch Quotes.' BrainyQuote.com. BrainyMedia Inc, 2021. 1 March 2021. https://www.brainyquote.com/quotes/plutarch_387443"
+        },
+        "source": {
+          "type": "string",
+          "description": "The book, article, paper or speech that this quote is recorded from.",
+          "example": "https://www.brainyquote.com/quotes/plutarch_387443"
+        },
+        "tags": {
+          "type": "string",
+          "description": "A list of tags that describe the topic of the quotation.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "courage",
+            "cowardice"
+          ]
+        },
+        "rating": {
+          "type": "number",
+          "description": "The rating on a scale of 0 to 5 stars.",
+          "example": 2.5
+        },
+        "createdAt": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The date and time that this document was added to the database."
+        },
+        "updatedAt": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The data and time that this document was last updated."
+        }
+      }
+    },
+    "options": {},
+    "path": [],
+    "propertyPath": "instance",
+    "errors": [
+      {
+        "path": [
+          "tags"
+        ],
+        "property": "instance.tags",
+        "message": "is not of a type(s) string",
+        "schema": {
+          "type": "string",
+          "description": "A list of tags that describe the topic of the quotation.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "courage",
+            "cowardice"
+          ]
+        },
+        "instance": [
+          ""
+        ],
+        "name": "type",
+        "argument": [
+          "string"
+        ],
+        "stack": "instance.tags is not of a type(s) string"
+      }
+    ],
+    "disableFormat": false
+  }
+}
